@@ -106,7 +106,7 @@ A useful simplification of the undulator radiation consists in a spherical wave 
 
 
 
-\subsection{MODELING BEAM PROPAGATION}
+\subsection{Modeling propagation in free space}
 \label{sec:propagation}
 
 For simulating the beamline, the wavefront at the source has to be created using the methods in Section \ref{sec:sources}, and the iterative effect of the optical elements has to be simulated using the results in yhe next section \ref{sec:elements}. But the wavefront changes when transported in free space from element to element. The Fresnel propagator \cite{goodmanfourier} gives a recipe to compute the transported wavefield at a position $y_1$ as a function of the wavefield at position $y_0$
@@ -149,7 +149,7 @@ K = e^{-i \pi \lambda (y_1-y_0) \frac{u^2}{m_x} }.
 The term $m_x$ is the magnification (zoom) factor. 
 Note that setting one magnification $m_x=1$ one obtains the standard Fresnel propagator (Eq.~\ref{eq:fft}). \todo{check square root}
 
-\subsection{MODELING OPTICAL ELEMENTS}\
+\subsection{Modeling optical elements}
 \label{sec:elements}
 
 In many cases, the optical elements can be considered in a good approximation as thin elements (zero thickness along the $y$ axis), therefore their effect can be encapsulated in a complex transmission amplitude 
@@ -243,11 +243,13 @@ Total power $P$ emitted by an undulator is:
 % where $G(K)$ is a function that can be approximated to one for $K>0.8$, 
 where $K$ is the undulator deflecting parameter, $N_u$ the number of periods, $\Lambda$ the undulator period, $I$ is the storage ring current, and $E_e$ is the storage ring energy. 
 
-From these equation we can deduce that the maximum of power is obtained at maximum of K corresponding to the minimum of the energy for a given harmonic.  We have selected the case of the FLEXON beamline because the insertion device delivers a high power and the beamline design follows the structure already described. Therefore, it constitutes the worst case that requires the most demanding actions to minimize the deformations (in M1) and correct the distortions (in M3). The FLEXON beamline will incorporate a Delta undulator \cite{deltaundulator} with $\lambda=$28.8 mm, $N_u=$137 and $K_{max}=$ 3.07, emitting a total power of $P=$3203 W. 
+From these equation we can deduce that the maximum of power is obtained at maximum of K corresponding to the minimum of the energy for a given harmonic.  We have selected the case of the FLEXON beamline because the insertion device delivers a high power and the beamline design follows the structure already described. Therefore, it constitutes the worst case that requires the most demanding actions to minimize the deformations (in M1) and correct the distortions (in M3). The FLEXON beamline will incorporate a Delta undulator \cite{deltaundulator} with $\lambda=$28.8 mm, $N_u=$137 and $K_{max}=$ 3.07, emitting a total power of $P=$3203 W. \todo{6546 W?}
 
 \subsection{Deformation of M1 due to heat load}
 
-The M1 Au-coated mirror is at a distance D=13.73 m from the source. Two different cooling schemes are studied, one using liquid nitrogen (LN) and another using water. The geometry of the mirror bulk, the clamping mechanisms and even the mirror dimensions are different for the two cases \todo{add reference or internal report?}. For the cryogenically cooled mirror, the mirror dimensions are 500 $\times$ 100 mm$^2$. It receives 3750 W with a peak power density of 1.60 W/mm$^2$. The beam is cropped by an entrance slit to select $\pm 3 \sigma$ of the central cone at the at first harmonic (E=231 eV). In the case of water cooling, the mirror is smaller with a dimension $\pm 4 \sigma$. 
+%The M1 Au-coated mirror is at a distance D=13.73 m from the source. Two different cooling schemes are studied, one using liquid nitrogen (LN) and another using water. In both cases the The geometry of the mirror substrate, the clamping mechanisms and even the mirror dimensions are different for the two cases \todo{add reference or internal report?}. For the cryogenically cooled mirror, the mirror dimensions are 500 $\times$ 100 mm$^2$. It receives 3750 W with a peak power density of 1.60 W/mm$^2$. \todo{I get 6546 W using the equation above} The beam is cropped by an entrance slit to select $\pm 3 \sigma$ of the central cone at the at first harmonic (E=231 eV). In the case of water cooling, the mirror is smaller with a dimension $\pm 4 \sigma$. 
+
+The M1 is 13.73 m from the source, has a grazing angle of 1.25\textdegree, and is gold coated. The peak absorbed power density is 1.1  The total power Two different cooling schemes are studied, one using liquid nitrogen (LN) and another using water. In both cases the The geometry of the mirror substrate, the clamping mechanisms and even the mirror dimensions are different for the two cases \todo{add reference or internal report?}. For the cryogenically cooled mirror, the mirror dimensions are 500 $\times$ 100 mm$^2$. It receives 3750 W with a peak power density of 1.60 W/mm$^2$. \todo{I get 6546 W using the equation above} The beam is cropped by an entrance slit to select $\pm 3 \sigma$ of the central cone at the at first harmonic (E=231 eV). In the case of water cooling, the mirror is smaller with a dimension $\pm 4 \sigma$. 
 
 In Fig.~\ref{fig:M1powerdensity} the power density arriving on the M1 surface is represented for the maximum dispersion factor $K=3.07$ in polarization cases (linear horizontal, vertical, at 45\textdegree, circular and elliptical). The distribution of the power in the mirror is very different in the different cases therefore the deformations induced are highly dependent on the polarization. Note also that the peak value of power density is dependent on the undulator phase.
 
@@ -393,7 +395,7 @@ The simulations use a widget application {\it WOFRY corrector (reflector)} that 
    \end{center}
    \caption[example] 
    { \label{fig:intensitycorrected} 
-Top: intensity distribution at the focal position when the different deformations of M1 are corrected my the AXO in M3: a) distributions given by the ideal correction profile, b) distributions given by profiles resulting from the expansion of the ideal profiles as a function of the AXO orthonormal basis. Note that the intensity profiles have been shifted vertically for clarity. Bottom: The different correcting profiles at M3: c) ideal profiles, d) profiles from the expansion vesus the orthonormal basis.}
+Top: intensity distribution at the focal position when the different deformations of M1 are corrected my the AXO in M3: a) distributions given by the ideal correction profile, b) distributions given by profiles resulting from the expansion of the ideal profiles as a function of the AXO orthonormal basis. Note that the intensity profiles have been shifted vertically for clarity. Bottom: The different correcting profiles at M3: c) ideal profiles, d) profiles from the expansion versus the orthonormal basis.}
    \end{figure} 
 
 
@@ -404,7 +406,7 @@ The next question is whether the correcting profiles can be obtained from the re
 Experimental data comes from the study of a mirror prototype manufactured by JTEC and tested at APS. The mirror length is 270 mm and includes 18 actuators. The mirror profiles obtained by activating a single actuator were measured. The 18 profiles obtained are called influence functions. If we want to set a given arbitrary  profile in the mirror, we decompose this profile as a linear combination of the influence functions. The 18 coefficients constitute the input to the actuators.  
 We perform a Gram-Schmidt fitting of the correction profile on an orthonormal basis of AXO influence functions. The basis is computed from the 18 measured influence functions plus a constant term to account for path length changes, and a linear term to provide tilt capabilities. The correction profile is easily decomposed (fitted) as a function of the orthonormal bases. The reconstructed profile as a linear combination of the bases (orthonormal) constitutes the "realistic" profile that could be obtained by the AXO. Obviously not every profile could be obtained from the AXS system. For instance, our mirror of length L with 18 actuators could not produce a sinusoidal profile with period smaller than L/18. 
 
-Fig.~\ref{fig:intensitycorrected}b shows the intensity distribution when the adaptive M3 is using the "resonable" mirror profiles built from the AXOS orthonormal bases. These profiles are shown in Fig.~\ref{fig:intensitycorrected}d. The correction obtained in this way is almost identical to the one obtained using the ideal correcing profiles, manifesting the ability of the AXO to compensate for the non-negligible surface errors induced by heat load in M1.  
+Fig.~\ref{fig:intensitycorrected}b shows the intensity distribution when the adaptive M3 is using the "resonable" mirror profiles built from the AXOS orthonormal bases. These profiles are shown in Fig.~\ref{fig:intensitycorrected}d. The correction obtained in this way is almost identical to the one obtained using the ideal correcting profiles, manifesting the ability of the AXO to compensate for the non-negligible surface errors induced by heat load in M1.  
 
 
 \subsection{Maximum deformation that AXO in M3 can correct}
