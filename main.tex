@@ -221,7 +221,7 @@ The grating equation is
 \end{equation}
 with $\alpha$ is the incidence angle (measured with respect to the normal), $\beta$ is the reflection angle, with opposite sign of $\alpha$ if it lies at the other side of the normal, $m$ the diffraction order (positive for inside reflection, i.e., $\alpha \ge |\beta|$),
 %(note than in SHADOW is the contrary, inside orders are negative)
-$\lambda$ is the photon wavelength, and $g$ is the grating density, which is a function of $w$ for VLS gratings: $g = g_0 + g_1 w + g_2 w^2 + ...$ with $g_0 = 1/d_0$ the lines/unit of length at the grating center ($d_0$ the distance between two grating lines).
+$\lambda$ is the photon wavelength, and $g$ is the grating groove density, which is a function of $w$ for VLS gratings: $g = g_0 + g_1 w + g_2 w^2 + ...$ with $g_0 = 1/d_0$ the lines/unit of length at the grating center ($d_0$ the distance between two grating lines).
 
 The simulation of a grating is complicated using a simplified line in Eq.~\ref{eq:idealReflector} because in addition to the geometric optical path it is necessary to account for the wavelength-dependent component. We used a "brute force" approach which is exact (except for accounting for grating efficiency) and consists in defining the grating as a numeric mesh and apply the {\it grazing reflector}. It is important not to undersample the grating (e.e., include several points per "line") and orientate the incident and image wavefronts with the correct angles $\alpha$ and $\beta$.      
 
@@ -249,9 +249,25 @@ From these equation we can deduce that the maximum of power is obtained at maxim
 
 %The M1 Au-coated mirror is at a distance D=13.73 m from the source. Two different cooling schemes are studied, one using liquid nitrogen (LN) and another using water. In both cases the The geometry of the mirror substrate, the clamping mechanisms and even the mirror dimensions are different for the two cases \todo{add reference or internal report?}. For the cryogenically cooled mirror, the mirror dimensions are 500 $\times$ 100 mm$^2$. It receives 3750 W with a peak power density of 1.60 W/mm$^2$. \todo{I get 6546 W using the equation above} The beam is cropped by an entrance slit to select $\pm 3 \sigma$ of the central cone at the at first harmonic (E=231 eV). In the case of water cooling, the mirror is smaller with a dimension $\pm 4 \sigma$. 
 
-The M1 is 13.73 m from the source, has a grazing angle of 1.25\textdegree, and is gold coated. The peak absorbed power density is 1.1  The total power Two different cooling schemes are studied, one using liquid nitrogen (LN) and another using water. In both cases the The geometry of the mirror substrate, the clamping mechanisms and even the mirror dimensions are different for the two cases \todo{add reference or internal report?}. For the cryogenically cooled mirror, the mirror dimensions are 500 $\times$ 100 mm$^2$. It receives 3750 W with a peak power density of 1.60 W/mm$^2$. \todo{I get 6546 W using the equation above} The beam is cropped by an entrance slit to select $\pm 3 \sigma$ of the central cone at the at first harmonic (E=231 eV). In the case of water cooling, the mirror is smaller with a dimension $\pm 4 \sigma$. 
 
-In Fig.~\ref{fig:M1powerdensity} the power density arriving on the M1 surface is represented for the maximum dispersion factor $K=3.07$ in polarization cases (linear horizontal, vertical, at 45\textdegree, circular and elliptical). The distribution of the power in the mirror is very different in the different cases therefore the deformations induced are highly dependent on the polarization. Note also that the peak value of power density is dependent on the undulator phase.
+The M1 is 13.73 m from the source, has a grazing angle of 1.25\textdegree, and is gold coated. The scale and distribution of the heat load on the mirror depends on undulator polarization mode, phase, and deflection parameter $K$. In fig.~\ref{fig:M1powerdensity} the incident power density is plotted for $K=3.07$ and various polarization cases (linear horizontal, vertical, at 45\textdegree, circular and elliptical).
+
+The absorbed power density can be computed by any one of several methods, for example using the SPECTRA code with the absorption curve calculated for the mirror's grazing angle and coating \cite{codeSPECTRA}.  The peak absorbed power density on the mirror is 1.01 W/mm$^2$ at $K=3.07$. The total absorbed power in a $\pm 3 \sigma$ aperture is approximately 239 W, where $\sigma$ is the width of the spatial distribution of the first harmonic at $K=3.07$, corresponding to an energy of 231 eV.  %(Fig.~\ref{fig:M1absorption}).
+
+We compute the distortion of the mirror using the finite element method, as implemented in the ANSYS software. The result of the finite element calculation is a map of the surface deformation for a given heat load and mirror design. Fig.~\ref{fig:M1deformation} shows the deformation maps (column 1) and the extracted profile (column 2). The map was loaded in OASYS using a dedicated widget that also extracts the 1D profile and send it to the reflector.
+
+We calculated distortions for two different cooling schemes: a water-side-cooled mirror and a liquid-nitrogen-cooled mirror \todo{ref paper on this, Cutler et. al.}. Both mirrors are made from single-crystal-silicon substrates. In the case of the water-side-cooled mirror, we controlled distortion by a combination of mirror design parameters, specifically beam overfilling, a notched or smart-cut substrate, and tuned cooling length \todo{ref Zhang, Khounsary, others}.  Note that we did not optimize these parameters for to minimize height or slope error, but instead chose parameters for a range of heat loads, and to facilitate adaptive correction.
+
+It is important to note that our water-cooled finite element model does not include a mounting or cooling system, and therefore the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
+
+
+
+
+
+
+
+
+ 
 
 \begin{figure} [ht]
 \begin{center}
@@ -283,9 +299,6 @@ f) $K_h=2.171,K_v=2.171, \Phi=35$ \textdegree,
 \end{figure} 
 
 
-We are interested in the fraction of the arriving power absorbed by the mirror which will be absorbed by the mirror and converted in heat. It must be evacuated by a more or less efficient cooling system. There are several ways to calculate that. One is using SPECTRA\cite{codeSPECTRA}, which gives a peak power density of 1.01 W/mm$^2$ and a power of 239 W in a 100 $\times$ 24 mm$^2$ area (corresponding to $\pm 3 \sigma$ aperture). %(Fig.~\ref{fig:M1absorption}).
-In the case of the cryogenically cooled mirror this is the total power on the mirror because this configuration includes an entrance slit cropping the beam to that value. In the case of water-cooled mirror, the beam overilluminates the mirror that has dimensions of 133 $\times$ 32 mm$^2$ corresponding to $\pm 4 \sigma$ acceptance.
-
 
 
 
@@ -301,9 +314,7 @@ In the case of the cryogenically cooled mirror this is the total power on the mi
 %   \end{figure} 
 
 
-Finite Elements Analysis has been performed using the ANSYS \todo{reference} for realistic models of both mirrors implementing different cooling. \todo{Grant: add some details of calculations?}
 
-The ANSYS calculations produce a 2D map of the surface deformation for the different illumination and cooling cases. Fig.~\ref{fig:M1deformation} shows the 2D deformation maps (column 1) and the extracted profile (column 2). The 2D map was loaded in OASYS using a dedicated widget that also extracts the 1D profile and send it to the reflector. 
 
 \newpage 
 
@@ -489,6 +500,8 @@ This simulations result for the vertical plane can be combined with the results 
 
 We presented a simple model to simulate a beamline using 1D wavefront propagation. The code developed is fully implemented in the WOFRY package in OASYS.
 We analyzed the degradation of the beamline parameters, in particular intensity distribution and Strehl ratio, due to the thermal load of the white beam mirror M1. We showed that in the case of cryogenic cooling of the M1 mirror the performances remain very close to the ideal (undeformed) case therefore no correction is needed. However, when the M1 mirror is water-cooled, the induced heat load errors disturb significantly the intensity distribution at the focal plane. These disturbances can be corrected using adaptive x-ray optics, as verified by simulating a realistic model of wavefront correction. We checked that the correction would work for M1 deformations with curvature ("bump") in the range 100m-1000Km. 
+
+However, because our water-cooled finite element model does not include a mounting or cooling system, the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
 
 
 %   \begin{figure} [ht]
