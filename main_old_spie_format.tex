@@ -1,105 +1,48 @@
-%------------------------------------------------------------------------------
-% Template file for the submission of papers to IUCr journals in LaTeX2e
-% using the iucr document class
-% Copyright 1999-2013 International Union of Crystallography
-% Version 1.6 (28 March 2013)
-%------------------------------------------------------------------------------
+\documentclass[]{spie}  %>>> use for US letter paper
+%\documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
+%\documentclass[nocompress]{spie}  %>>> to avoid compression of citations
 
-\documentclass{iucr}              % DO NOT DELETE THIS LINE
-% \documentclass[preprint]{iucr}              % DO NOT DELETE THIS LINE
-
-\usepackage{epsfig}
+\renewcommand{\baselinestretch}{1.0} % Change to 1.65 for double spacing
+ 
+\usepackage{amsmath,amsfonts,amssymb}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb}
-\usepackage{color,xcolor}
-%\usepackage{siunitx}
-\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{textcomp}
 
-
-
-% \documentclass[a4paper,10pt]{article}
-% \usepackage[utf8]{inputenc}
-% \usepackage[]{graphicx}
-% \usepackage{rotating}
-% \usepackage{hyperref}
-% \usepackage{amsmath} 
-% \usepackage{color}
-% \usepackage{listings}
-% \usepackage{lscape}
-% \usepackage{float}
-% \usepackage{verbatim}
-
-% \usepackage{subcaption}
-% \usepackage{multirow}
-
-
-\def\ave#1{{\langle #1\rangle}}
-\def\half{{1\over 2}}
-
-\newcommand{\refeq}[1]{Eq.~\ref{#1}}
-\newcommand{\refpic}[1]{Fig.~\ref{#1}}
 \newcommand{\todo}[1]{{\color{red}[TODO: "#1'']}}
-\newcommand{\reftable}[1]{Table.~\ref{#1}}
 \newcommand{\inblue}[1]{{\color{blue}#1}}
 \newcommand{\inred}[1]{{\color{red}#1}}
 \newcommand{\ingreen}[1]{{\color{green}#1}}
 
-\DeclareMathOperator{\sinc}{sinc}
-% \lstset{language=Python,
-%         keywordstyle=\color{blue}\textbf,
-% 	commentstyle=\color[rgb]{0.133,0.545,0.133},
-% 	stringstyle=\color[rgb]{0.627,0.126,0.941},
-% 	breaklines=true,
-% 	showstringspaces=false,
-% 	frame=trBL, basicstyle=\scriptsize %\small %\tiny %\footnotesize
-%        }
+\title{Compensation of heat deformations by adaptive optics in beamline simulations}
+
+\author[a]{Manuel Sanchez del Rio}
+\author[a]{Antoine Wojdyla}
+\author[a]{Kenneth A. Goldberg}
+\author[a]{Grant Cutler}
+\author[a]{Daniele Cocco}
+\author[a]{Howard Padmore}
+\affil[a]{LBNL, 1 Cyclotron Road, Berkeley CA, USA}
 
 
+\authorinfo{Further author information: (Send correspondence to Antoine Wojdyla)\\Antoine Wojdyla: E-mail: awojdyla@tlbl.gov}
 
-
-     %-------------------------------------------------------------------------
-     % Information about journal to which submitted
-     %-------------------------------------------------------------------------
-     \journalcode{S}              % Indicate the journal to which submitted
-                                  %   A - Acta Crystallographica Section A
-                                  %   B - Acta Crystallographica Section B
-                                  %   C - Acta Crystallographica Section C
-                                  %   D - Acta Crystallographica Section D
-                                  %   E - Acta Crystallographica Section E
-                                  %   F - Acta Crystallographica Section F
-                                  %   J - Journal of Applied Crystallography
-                                  %   M - IUCrJ
-                                  %   S - Journal of Synchrotron Radiation
-
-\begin{document}                  % DO NOT DELETE THIS LINE
-
-\title{Compensation of heat deformations by adaptive optics for the ALS upgrade}
-
-\author[a]{Manuel}{Sanchez del Rio}
-\cauthor[a]{Antoine}{Wojdyla}{awojdyla@lbl.gov}{}
-\author[a]{Kenneth A.}{Goldberg}
-\author[a]{Grant}{Cutler}
-\author[a]{Daniele}{Cocco}
-\author[a]{Howard}{Padmore}
-\aff[a]{LBNL, 1 Cyclotron Road, Berkeley CA, \country{USA}}
-
-\keyword{Adaptive X-ray Optics}\keyword{Soft X-rays, beamlines}\keyword{wave optics}\keyword{WOFRY}\keyword{Oasys}
+% Option to view page numbers
+\pagestyle{empty} % change to \pagestyle{plain} for page numbers   
+\setcounter{page}{301} % Set start page numbering at e.g. 301
  
+\begin{document} 
 \maketitle
 
-\begin{synopsis}
-xxx 
-\end{synopsis}
-
 \begin{abstract}
-We develop and apply a realistic wave optics simulation method to correct wavefront distortions resulting from the thermal deformations using adaptive X-ray optics in high-brightness beamlines. Several planned soft X-ray and tender X-ray insertion-device beamlines in the Advanced Light Source upgrade, where wavefront preservation is paramount, rely on a common design principle. A flat, first mirror intercepts the white beam; vertical focusing is provided by a variable-line-space monochromator; and horizontal focusing comes from a single, pre-figured, adaptive mirror. 
+We develop and apply a realistic wave optics simulation method to correct wavefront distortions resulting from the thermal deformations using adaptive X-ray optics in high-brightness beamlines. Several planned soft x-ray and tender x-ray insertion-device beamlines in the Advanced Light Source upgrade, where wavefront preservation is paramount, rely on a common design principle. A flat, first mirror intercepts the white beam; vertical focusing is provided by a variable-line-space monochromator; and horizontal focusing comes from a single, pre-figured, adaptive mirror. 
 A variety of scenarios to cope with thermal distortion in the first mirror are implemented using finite-element analysis. We analyze the degradation of the intensity distribution at the focal plane and implement a model of the adaptive optics to correct it. We report the range of correctable wavefront errors across the operating range of the beamlines in terms of mirror curvature and spatial frequencies. The software implemented a one-dimensional wavefront propagation tool in the OASYS package, which is an adaptable, customizable and efficient beamline modeling platform well suited to study this issue.
 \end{abstract}
 
 % Include a list of keywords after the abstract 
+\keywords{Adaptive X-ray Optics, Soft X-rays, beamlines, wave optics, WOFRY, Oasys}
 
-
-\section{Introduction}
+\section{INTRODUCTION}
 \label{sec:intro}  
 
 Quantitative calculation and evaluation of the parameters related to X-ray optics are of great importance for designing, building and exploiting new beamlines. These calculations allow testing of the design parameters in a virtual computer environment where advantages and limitations can be simulated accurately. The optics imperfections play a fundamental role in the simulations and often constitute the limiting factor of the beamline performances. Deformations of the optical elements due to heat load need to be always controlled and in some cases corrected, therefore optics simulations and engineering modeling of the thermal deformations by finite element analysis (FEA) have to be developed in parallel. 
@@ -114,13 +57,13 @@ A variety of thermal distortion scenarios were implemented from finite-element a
 In the case of interest of ALS-U, the coherent fraction is high enough  to justify a full coherent optics calculation (about 0.8 for the case that we will study of a 4 m undulator at 250 eV). Moreover, in this case, as most times in synchrotron beamlines, the optics in the horizontal and vertical planes are decoupled thus a separated modeling of the horizontal and vertical planes is justified. The 1D modeling is orders of magnitude less demanding in computational resources than the conventional 2D calculations, therefore it is always recommended to start a wave optics simulation in its simpler form: a 1D model. We present here the fundamentals of a 1D wave propagation model implemented in the WOFRY \cite{codeWOFRY} tool in OASYS. 
 
 The 1D waveoptics propagation model is also well adapted to study optimization problems, because the scan of a single parameter or multiple optimization require running many single simulations. In our case, the live-optimization of the M3 optical profile is optimized and expressed as a function of the input signal required by the actuators that controls the optics. 
-After studying the performance of a 20-channel adaptive X-ray mirror prototype, at-wavelength and with visible-light, we implemented mirror shape-control algorithms in software that are designed to restore and optimize the focused beam intensity (i.e. Strehl ratio), considering the incident wavefront’s phase and amplitude.
+After studying the performance of a 20-channel adaptive x-ray mirror prototype, at-wavelength and with visible-light, we implemented mirror shape-control algorithms in software that are designed to restore and optimize the focused beam intensity (i.e. Strehl ratio), considering the incident wavefront’s phase and amplitude.
 
 
 The paper is organised as follows: we first describe the methods and algorithms implemented in the WOFRY 1D simulations concerning the sources, wave propagators for free space, and optical elements and (section 2). In section 3 we describe the system under study, that corresponds to the parameters of the FLEXON beamline at ALS-U. The FEA results for M1 in terms of surface deformation originated by absorbed power are discussed. Finally, we show how the adaptive X-ray optics (AXO) can compensate the errors using an ad-hoc computed mirror profile compatible with the AXO control system. We end showing how the complete beamline can be simulated using a 1D wavefront propagation model by combining the results of the horizontal and vertical planes.  
 
-%We describe the implementation of realistic, adaptive wavefront correction in high-brightness beamline simulations to study the correction of thermal deformation. Several planned soft X-ray and tender X-ray insertion-device beamlines in the Advanced Light Source upgrade, where wavefront preservation is paramount, rely on a common design principle. A flat, first mirror intercepts the white beam; vertical focusing is provided by a variable-line-space (VLS) monochromator; and horizontal focusing comes from a single, pre-figured, adaptive mirror. Concerns about thermal distortion from the first mirror compel us to evaluate the domain of correctable errors. 
-%After studying the performance of a 20-channel adaptive X-ray mirror prototype, at-wavelength and with visible-light, we implemented mirror shape-control algorithms in software that are designed to restore and optimize the focused beam intensity (i.e. Strehl ratio), considering the incident wavefront’s phase and amplitude. 
+%We describe the implementation of realistic, adaptive wavefront correction in high-brightness beamline simulations to study the correction of thermal deformation. Several planned soft x-ray and tender x-ray insertion-device beamlines in the Advanced Light Source upgrade, where wavefront preservation is paramount, rely on a common design principle. A flat, first mirror intercepts the white beam; vertical focusing is provided by a variable-line-space (VLS) monochromator; and horizontal focusing comes from a single, pre-figured, adaptive mirror. Concerns about thermal distortion from the first mirror compel us to evaluate the domain of correctable errors. 
+%After studying the performance of a 20-channel adaptive x-ray mirror prototype, at-wavelength and with visible-light, we implemented mirror shape-control algorithms in software that are designed to restore and optimize the focused beam intensity (i.e. Strehl ratio), considering the incident wavefront’s phase and amplitude. 
 %We implemented the modeling in OASYS which is an adaptable, customizable beamline modeling platform well suited to study this issue. A variety of thermal distortion scenarios were implemented from finite-element analysis (FEA) models using realistic undulator power spectra and cooling strategies under consideration by the project. For the proposed beamline designs, we report the range of correctable wavefront errors across the operating range of the beamlines in terms of realistic distortions, and different curvature radii and spatial frequencies.
 
 
@@ -193,7 +136,6 @@ Note that one sum over the $N$ points of the sampled incident wavefront has to b
 
 \subsubsection{Fresnel propagator using FFT: The zoom propagator}
 \label{sec:zoomPropagator}
-
 The Fresnel integral propagator in Eq.~\ref{eq:fresnelPropagator} can be seen as convolution of the wavefield with a Gaussian kernel.    
 One can write Equation \ref{eq:fresnelPropagator} in convolution form, involving two-Fourier transforms:
 \begin{equation}\label{eq:fft}
@@ -250,7 +192,6 @@ When the element is a slit, then $A=1$. If it is a beamstop, then $A=0$. If we d
 
 \subsubsection{Ideal lens}
 \label{sec:idealLens}
-
 We can define an ideal lens as a focusing device that converts a plane wave into a spherical wave collapsing to the focus at a distance $f$ from the ideal lens position. Therefore
 \begin{equation}
     R(x;\omega) = e^{-i k~x^2/(2 f)}
@@ -283,6 +224,7 @@ Once known the electric perturbation at the mirror surface, another propagation 
 \subsubsection{Gratings}
 \label{sec:grating}
 
+
 A grating produces a deflection of the incident beam that is dependent on its wavelength. It is expressed by the grating equation is
 \begin{equation}
     m \lambda g = \sin\alpha + \sin\beta,
@@ -296,8 +238,7 @@ The simulation of a grating is complicated using a thin object model (Eq.~\ref{e
 \todo{  Test figure showing i) focusing with a spherical mirror implemented with the ideal reflector (no aberrations) and the grating reflector (it does account for aberration), and ii) a VLS grating that focus and corrects or not for coma}
 
 
-\section{Simulation of ALS-U generic undulator beamline}
-
+\section{SIMULATIONS FOR THE ALS-U GENERIC UNDULATOR BEAMLINE}
 Four new undulator beamlines are being designed for the ALS-U project. The different scientific cases imply particular selection of the insertion devices and beamline optics. However, most of the beamlines (or beamline branches) follow a similar scheme: 1) undulator source, 2) white beam flat mirror M1 deflecting horizontally, 2) plane mirror M2 vertically deflecting to work in tandem with the grating, 3) a VLS (varied line spacing) grating that disperses vertically the beam and focus it in the exit slit, and 4) a elliptical mirror M3 deflecting in the horizontal plane and focusing horizontally on the exit slit. The mirror M3 is equipped with a bimorph adaptive system that permits, in association with a wavefront sensor, to correct wave deformations introduced upstream of it.
 
 The goal of this paper is to study whether this AXO permits to correct the distortions produced by the heating and deformation of M1.
@@ -319,6 +260,7 @@ From these equation we can deduce that the maximum of power is obtained at maxim
 
 %The M1 Au-coated mirror is at a distance D=13.73 m from the source. Two different cooling schemes are studied, one using liquid nitrogen (LN) and another using water. In both cases the The geometry of the mirror substrate, the clamping mechanisms and even the mirror dimensions are different for the two cases \todo{add reference or internal report?}. For the cryogenically cooled mirror, the mirror dimensions are 500 $\times$ 100 mm$^2$. It receives 3750 W with a peak power density of 1.60 W/mm$^2$. \todo{I get 6546 W using the equation above} The beam is cropped by an entrance slit to select $\pm 3 \sigma$ of the central cone at the at first harmonic (E=231 eV). In the case of water cooling, the mirror is smaller with a dimension $\pm 4 \sigma$. 
 
+
 The white beam mirror M1 is placed at a distance 13.73 m from the source, has a grazing angle of 1.25\textdegree, and is gold coated. The distribution of the heat load on the mirror depends on undulator parameters (deflection parameter horizontal $K_h$, vertical $K_v$ and phase $\Phi$). Depending on the polarization wanted, these parameters take different values (horizontal linear polarization $K_h=0$, vertical linear polarization $K_v=0$, linear polarizartion at 45\textdegree $K_h=K_v$, $\Phi=0$, circular polarization $K_h=K_v$, $\Phi=90$\textdegree ). In Fig.~\ref{fig:M1powerdensity} the incident power density is plotted for $K=\sqrt{K_h^2 + K_v^2}=3.07$ in various polarization states.
 
 The absorbed power density can be computed by any one of several methods, for example using the SPECTRA code with the absorption curve calculated for the mirror's grazing angle and coating \cite{codeSPECTRA}.  The peak absorbed power density on the mirror is 1.01 W/mm$^2$. The total absorbed power in a $\pm 3 \sigma$ aperture is approximately 239 W, where $\sigma$ is the width of the spatial distribution of the first harmonic at $K=3.07$, corresponding to an energy of 231 eV.
@@ -329,64 +271,66 @@ We calculated distortions for two different cooling schemes: a water-side-cooled
 
 It is important to note that our water-cooled finite element model does not include a mounting or cooling system, and therefore the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
 
-\begin{figure} 
+\begin{figure} [ht]
 \begin{center}
 \begin{tabular}{l} 
-   a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
-   \includegraphics[width=0.45\textwidth]{figures/powerdensityKv.png}
-   \includegraphics[width=0.45\textwidth]{figures/powerdensityKh.png}\\
-   c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   d)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
-   \includegraphics[width=0.45\textwidth]{figures/powerdensityKhKv.png} 
-      \includegraphics[width=0.45\textwidth]{figures/powerdensityKhKv90.png}
- %     \includegraphics[height=4cm]{figures/powerdensityKhKv45.png}
-  %    \includegraphics[height=4cm]{figures/powerdensityKhKv35.png}
+   a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c)\\
+   \includegraphics[height=4cm]{figures/powerdensityKv.png}
+   \includegraphics[height=4cm]{figures/powerdensityKh.png}
+   \includegraphics[height=4cm]{figures/powerdensityKhKv.png} \\
+      d)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      e)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~f)\\
+      \includegraphics[height=4cm]{figures/powerdensityKhKv90.png}
+      \includegraphics[height=4cm]{figures/powerdensityKhKv45.png}
+      \includegraphics[height=4cm]{figures/powerdensityKhKv35.png}
 \end{tabular}
 \end{center}
-\caption
-{ \label{fig:M1powerdensity} Power density on mirror M1.
+\caption[example] 
+{ \label{fig:M1powerdensity} 
+Power density on mirror M1.
 a) $K_h=3.07, K_v=0$,
 b) $K_h=0,K_v=3.07$,
 c) $K_h=2.171,K_v=2.171, \Phi=0$ \textdegree,
-d) $K_h=2.171,K_v=2.171, \Phi=90$ \textdegree.
-%e) $K_h=2.171,K_v=2.171, \Phi=45$ \textdegree,
-%f) $K_h=2.171,K_v=2.171, \Phi=35$ \textdegree,
+d) $K_h=2.171,K_v=2.171, \Phi=90$ \textdegree,
+e) $K_h=2.171,K_v=2.171, \Phi=45$ \textdegree,
+f) $K_h=2.171,K_v=2.171, \Phi=35$ \textdegree,
 }
 \end{figure} 
 
+\newpage 
 
-  \begin{figure}
+   \begin{figure} [ht]
   \begin{center}
    \begin{tabular}{l} 
-   a$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   a$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~a$_3$)\\
-   \includegraphics[width=0.32\textwidth]{figures/cryogenic2d.png} 
-   \includegraphics[width=0.32\textwidth]{figures/deformationcryogenic1d.png}
-   \includegraphics[width=0.32\textwidth]{figures/intensitycryogenic.png} \\
+   a$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   a$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~a$_3$)\\
+   \includegraphics[height=3.5cm]{figures/cryogenic2d.png} 
+   \includegraphics[height=3.5cm]{figures/deformationcryogenic1d.png}
+   \includegraphics[height=3.5cm]{figures/intensitycryogenic.png} \\
 
-  b$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  b$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b$_3$)\\
-  \includegraphics[width=0.32\textwidth]{figures/cryogenic2dKh.png}
-  \includegraphics[width=0.32\textwidth]{figures/deformationcryogenic1dKh.png}
-  \includegraphics[width=0.32\textwidth]{figures/intensitycryogenicKh.png} \\
+  b$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  b$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b$_3$)\\
+  \includegraphics[height=3.5cm]{figures/cryogenic2dKh.png}
+  \includegraphics[height=3.5cm]{figures/deformationcryogenic1dKh.png}
+  \includegraphics[height=3.5cm]{figures/intensitycryogenicKh.png} \\
    
-   c$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   c$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c$_3$)\\ 
-   \includegraphics[width=0.32\textwidth]{figures/water1_2d.png}
-   \includegraphics[width=0.32\textwidth]{figures/deformationwater1_1d.png}   
-   \includegraphics[width=0.32\textwidth]{figures/intensitywater1.png} \\
+   c$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   c$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c$_3$)\\ 
+   \includegraphics[height=3.5cm]{figures/water1_2d.png}
+   \includegraphics[height=3.5cm]{figures/deformationwater1_1d.png}   
+   \includegraphics[height=3.5cm]{figures/intensitywater1.png} \\
 
    
-   d$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   d$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~d$_3$)\\
-   \includegraphics[width=0.32\textwidth]{figures/water2_2d.png} 
-   \includegraphics[width=0.32\textwidth]{figures/deformationwater2_1d.png} 
-   \includegraphics[width=0.32\textwidth]{figures/intensitywater2.png}\\
+   d$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   d$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~d$_3$)\\
+   \includegraphics[height=3.5cm]{figures/water2_2d.png} 
+   \includegraphics[height=3.5cm]{figures/deformationwater2_1d.png} 
+   \includegraphics[height=3.5cm]{figures/intensitywater2.png}\\
    
    \end{tabular}
   \end{center}
-   \caption
+   \caption[example] 
    { \label{fig:M1deformation} 
    Left column: 2D map of the surface deformation: a$_1$) cryogenic mirror for $K_h=3.07$, $K_v=0$; b$_1$) cryogenic mirror for $K_h=0$, $K_v=3.07$; c$_1$) water-cooled mirror $K_h=3.07$, $K_v=0$; d$_1$) water-cooled mirror $K_h=0$, $K_v=3.07$. Central column: the extracted 1D profiles a$_2$,b$_2$,c$_2$, and d$_2$ respectively. Right column: The focused image with these profiles are in Figs.~a$_3$, b$_3$, c$_3$ and d$_3$, respectively. 
    The FWHM values are: 3.72, 3.74, 8.31 and 35.08$\mu$m, respectively (3.68 $\mu$m for the undeformed one) and the Strehl ratios: 0.99, 0.98, 0.42 and 0.11, respectively (one for the undeformed mirror).
@@ -401,14 +345,14 @@ d) $K_h=2.171,K_v=2.171, \Phi=90$ \textdegree.
 
 The beamline simulation has been performed using WOFRY. The undulator field is calculated at a position just before M1 ($y$=13.73 m) using the model described in Section~\ref{sec:undulator}. M1 is a plane reflector that accepts a deformation profile. We first studied the case of no deformation. The wavefront is propagated from M1 to a distance 13.599 m in free space until M3 position using the zoom propagator (Section~\ref{sec:zoomPropagator}). Then M3 implements a reflector with a radius obtained from the lens equation $1/p + 1/q=1/f=2/R$ where $p=13.73+13.599$, $q=2.64$. With no deformation in M1 the image has a full-width at half maximum of 3.74 $\mu$m (Fig.~\ref{fig:nodeformation} and an intensity of 210 in arbitrary units, which will be then used to normalize intensities with the non-deformed case and calculate the Strehl ratio
 
-\begin{figure} 
+\begin{figure} [ht]
 \begin{center}
 \begin{tabular}{c} 
 \includegraphics[trim=0 0 5 200,clip,width=0.95\textwidth]{figures/wofrynodeformation.png}
 
 \end{tabular}
 \end{center}
-\caption
+\caption[example] 
 { \label{fig:nodeformation} 
 OASYS workspace showing the simulation for the beamline with no deformation in M1. The intensity profile of the beam are superposed at different positions, with FWHM of 787$\mu$m at M1, 1566$\mu$m at M3 and 3.74$\mu$m at the focal position.  }
 \end{figure} 
@@ -424,28 +368,29 @@ The M3 mirror is an adaptive shaped mirror presenting a predefined elliptical sh
 The simulations use a widget application {\it WOFRY corrector (reflector)} that computes and applies the correction in the following way: i) it extracts the phase from the incident wave $\phi_{inc}(x)$, ii)  it calculates the phase spherical wave collapsing to this focal position $\phi_{sph}(x)$, given a distance to the waist (position where we want to focus), iii) calculate the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc}$, and iv) compute the profile height $h(w) = -\Delta \phi(w) / (2 k \sin \theta)$. Fig.\ref{fig:intensitycorrected}a shows the result using the corrected profiles added to the elliptical shape of the mirror. It is noticeable that the correction works perfectly, arriving to results in intensity distribution and Strehl ratio that are almost identical to case using the undeformed M1. The Strehl ratio has been calculated as the ratio of the peak intensity for the deformed M1 and corrected M3 mirrors over the peak intensity of the undeformed M1 and uncorrected M3. It may look paradoxal that the Strehl ratio is slightly bigger than one for the cases of water-cooled M1. The reason of this apparent contradiction is that M1 becomes convex due to the thermal load (See Figs.~\ref{fig:M1deformation}c$_2$ and d$_2$), therefore M3 sees the source farther away and refocuses increasing its curvature thus producing a new optical system with higher demagnification.   
 
 
-   \begin{figure}
+   \begin{figure} [ht]
    \begin{center}
    \begin{tabular}{l} 
-  a$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  a$_2$)\\
+   a$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   b$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   c$_1$)\\
 
-    \includegraphics[width=0.5\textwidth]{figures/correctedprofiles.png}
-    \includegraphics[width=0.5\textwidth]{figures/intensitycorrected.png} \\ 
-  b$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  b$_2$)\\
-   \includegraphics[width=0.5\textwidth]{figures/correctedprofilesfitextrapolated.png}
-   \includegraphics[width=0.5\textwidth]{figures/intensitycorrectedfit.png} \\   
-  c$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   \includegraphics[width=0.32\textwidth]{figures/intensitycorrected.png}
+   \includegraphics[width=0.32\textwidth]{figures/intensitycorrectedfit.png}
+   \includegraphics[width=0.32\textwidth]{figures/intensitycorrectedfitcrop.png}\\
+  a$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  b$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   c$_2$)\\
-   \includegraphics[width=0.5\textwidth]{figures/correctedprofilesfit.png}
-   \includegraphics[width=0.5\textwidth]{figures/intensitycorrectedfitcrop.png}\\
+   \includegraphics[width=0.32\textwidth]{figures/correctedprofiles.png}
+   \includegraphics[width=0.32\textwidth]{figures/correctedprofilesfitextrapolated.png}
+   \includegraphics[width=0.32\textwidth]{figures/correctedprofilesfit.png}
+
 
    \end{tabular}
    \end{center}
-   \caption
+   \caption[example] 
    { \label{fig:intensitycorrected} 
-Correction profile on M2 (left) and intensity distribution (right) at the focal position when the different deformations of M1 are corrected by the AXO in M3 using  a) ideal correction profile, b)  expansion of the ideal profiles as a function of the AXO orthonormal basis and extrapolating the edges to the needed mirror length, and c)  expansion of the ideal profiles as a function of the AXO orthonormal basis which defines a shorter the mirror dimension. Note that the intensity profiles have been shifted vertically for clarity. }
+Top: intensity distribution at the focal position when the different deformations of M1 are corrected my the AXO in M3: a$_1$) distributions given by the ideal correction profile, b$_1$) distributions given by profiles resulting from the expansion of the ideal profiles as a function of the AXO orthonormal basis and extrapolating the edges to the needed mirror length, and c$_1$)  profiles resulting from the expansion of the ideal profiles as a function of the AXO orthonormal basis which defines a shorter the mirror dimension. Note that the intensity profiles have been shifted vertically for clarity. Bottom: The different correcting profiles at M3: a$_2$) ideal corrective profiles, $b_2$) profiles from the expansion versus the orthonormal basis and extrapolated to fit the required length, and c$_2$) profiles from the expansion but not extended.}
    \end{figure} 
 
 
@@ -464,23 +409,21 @@ It is interesting to study the limits of how much the AXO in M3 can correct an a
 
 We simulate profiles with a "bump" (convex) or anti-bump (concave) (Fig.~\ref{fig:strehlRatioVersusR}). Notice that at large error radii (above 50 Km), the error is small and the Strehl Ratio is approximately one. For smaller radii, there are cases where the bump spreads the light at M3, and allowing the adaptive correction to achieve an effectively higher numerical aperture (NA). When that happens, the beam is focused to a smaller point in the exit slit plane and the intensity increases, leading to an apparent Strehl Ratio above one, however, integrated power is conserved. For concave bumps (Fig.~\ref{fig:strehlRatioVersusR}a) the correction fails around a radius of about 600 m when the deformation in M1 focuses the beam into M3.
 
-  \begin{figure}
+  \begin{figure} [ht]
   \begin{center}
   \begin{tabular}{l} 
+  a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  b)\\
 
-
-  a) \\
-  \includegraphics[width=0.98\textwidth]{figures/flexon_ken_memo2_factor1.png} \\
-  b) \\
-  \includegraphics[width=0.98\textwidth]{figures/flexon_ken_memo2_factor-1.png} 
+  \includegraphics[width=0.45\textwidth]{figures/flexon_ken_memo2_factor1.png}
+      \includegraphics[width=0.45\textwidth]{figures/flexon_ken_memo2_factor-1.png} \\
 
 
   \end{tabular}
   \end{center}
-  \caption
+  \caption[example] 
   { \label{fig:strehlRatioVersusR} 
-Variation of the Strehl ratio as a function of the deformation radius of curvature in M1 for concave curvature (a) and convex curvature (b) 
-\todo{change the figure to make more visible the limit SR=1}}
+Variation of the Strehl ratio as a function of the deformation radius of curvature in M1 for concave curvature (a) and convex curvature (b) }
   \end{figure} 
 
 \todo{discuss the correction with the fitted profile}
@@ -490,42 +433,44 @@ Variation of the Strehl ratio as a function of the deformation radius of curvatu
 
 
 
-\section{Simulation of the full beamline}
+\section{SIMULATION OF THE FULL BEAMLINE}
 
 
 For completeness, we simulate the beamline in the vertical plane, featuring a grating monochromator. It consiste in a plane mirror M2 deflecting vertically, and a VLS grating that focus on the focal plane (exit slit). The role of M2 is to adjust the total deflecting angle of the monochromator (constant deflecting angle) when the VLS grating is rotated to chenge photon energy. For the simulations we can completely ignore it as it is not an optically active element given that i) it does not crop the beam, and ii) its surface is supposed to be perfect. The VLS grating is placed at 25.73 m from the source and 4.239 m from the focus. The parameters of the VLS optimized for working at E=250 eV are: $g_0$=300 lines/mm, $g_1=$  0.2698 mm$^{-2}$, and $g_3$=87748 10${^{-9}}$ mm$^{-3}$, and the angles are $\alpha$=87.239\textdegree and $\beta$=-85.829\textdegree. A numeric mesh covering the length of 150 mm is done with a step function (ruled grating) with 10 nm height (Fig.~\ref{fig:grating}a). The effect of the grating diffraction is calculated using the model described in Section~\ref{sec:grating}. The intensity distribution after the grating diffraction is in Fig.~\ref{fig:grating}b which shows a well-focused image with FWHM=4.18$\mu$m.
 
 
-  \begin{figure}
+  \begin{figure} [ht]
   \begin{center}
   \begin{tabular}{l} 
-  a)\\
-  \includegraphics[width=1\textwidth]{figures/grating.png} \\
-  b) \\
-   \includegraphics[width=1\textwidth]{figures/intensitygrating.png}
+  a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  b)\\
+
+  \includegraphics[width=0.45\textwidth]{figures/grating.png}
+    \includegraphics[width=0.45\textwidth]{figures/intensitygrating.png}
 
   \end{tabular}
   \end{center}
-  \caption
+  \caption[example] 
   { \label{fig:grating} 
 a) VLS profile used for the simulations (fragment). The total VLS grating length is 150 mm and contains 5 10$^5$ points. b) Intensity profile at the image position (exit slit) produced by the VLS grating.   
 }
   \end{figure}
 
 
-The simulations for the vertical plane are combined with the results for the horizontal plane (Fig.~\ref{fig:nodeformation} or \ref{fig:intensitycorrected}) for making a 2D plot. This is done via the outer product of the horizontal and vertical profiles. Fig.~\ref{fig:intensity2D} shows the results for the worst case of deformation (vertical polarization with water cooling) before and after correction. 
+This simulations result for the vertical plane can be combined with the results for the horizontal plane (Fig.~\ref{fig:nodeformation} or \ref{fig:intensitycorrected}) for making a 2D plot. This is done via the outer product of the horizontal and vertical profiles. Fig.~\ref{fig:intensity2D} shows the results for the worst case of deformation (vertical polarization with water cooling) before and after correction. 
 
-  \begin{figure}
+  \begin{figure} [ht]
   \begin{center}
   \begin{tabular}{l} 
-  a)\\
-  \includegraphics[width=1\textwidth]{figures/intensity2Duncorrected.png}
+  a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   b)\\
-  \includegraphics[width=1\textwidth]{figures/intensity2Dcorrected.png}
+
+  \includegraphics[width=0.45\textwidth]{figures/intensity2Duncorrected.png}
+    \includegraphics[width=0.45\textwidth]{figures/intensity2Dcorrected.png}
 
   \end{tabular}
   \end{center}
-  \caption
+  \caption[example] 
   { \label{fig:intensity2D} 
 2D intensity at the image position (exit slit plane) obtained for the worst deformation case (vertical polarization and water cooled M1) a) uncorrected image. b) corrected image by using M3 AXO. These images have been obtained combining the vertical profile (Fig.~\ref{fig:grating})) with the uncorrected and corrected horizontal profiles (Figs.~\ref{fig:nodeformation} and \ref{fig:intensitycorrected}, respectively.)
 }
@@ -533,10 +478,10 @@ The simulations for the vertical plane are combined with the results for the hor
   
   
 
-\section{Summary and conclusions}
+\section{SUMMARY AND CONCLUSIONS}
 
 We presented a simple model to simulate a beamline using 1D wavefront propagation. The code developed is fully implemented in the WOFRY package in OASYS.
-We analyzed the degradation of the beamline parameters, in particular intensity distribution and Strehl ratio, due to the thermal load of the white beam mirror M1. We showed that in the case of cryogenic cooling of the M1 mirror the performances remain very close to the ideal (undeformed) case therefore no correction is needed. However, when the M1 mirror is water-cooled, the induced heat load errors disturb significantly the intensity distribution at the focal plane. These disturbances can be corrected using adaptive X-ray optics, as verified by simulating a realistic model of wavefront correction. We checked that the correction would work for M1 deformations with curvature ("bump") in the range 100m-1000Km. 
+We analyzed the degradation of the beamline parameters, in particular intensity distribution and Strehl ratio, due to the thermal load of the white beam mirror M1. We showed that in the case of cryogenic cooling of the M1 mirror the performances remain very close to the ideal (undeformed) case therefore no correction is needed. However, when the M1 mirror is water-cooled, the induced heat load errors disturb significantly the intensity distribution at the focal plane. These disturbances can be corrected using adaptive x-ray optics, as verified by simulating a realistic model of wavefront correction. We checked that the correction would work for M1 deformations with curvature ("bump") in the range 100m-1000Km. 
 
 %However, because our water-cooled finite element model does not include a mounting or cooling system, the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
 
@@ -545,7 +490,7 @@ We analyzed the degradation of the beamline parameters, in particular intensity 
 \todo{This work has been performed....} 
 
 % References
-\bibliographystyle{iucr} % makes bibtex use spiebib.bst
 \bibliography{report} % bibliography data in report.bib
+\bibliographystyle{spiebib} % makes bibtex use spiebib.bst
 
 \end{document} 
