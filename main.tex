@@ -33,18 +33,18 @@
 % \usepackage{multirow}
 
 
-\def\ave#1{{\langle #1\rangle}}
-\def\half{{1\over 2}}
+%\def\ave#1{{\langle #1\rangle}}
+%\def\half{{1\over 2}}
 
-\newcommand{\refeq}[1]{Eq.~\ref{#1}}
-\newcommand{\refpic}[1]{Fig.~\ref{#1}}
+%\newcommand{\refeq}[1]{Eq.~\ref{#1}}
+%\newcommand{\refpic}[1]{Fig.~\ref{#1}}
 \newcommand{\todo}[1]{{\color{red}[TODO: "#1'']}}
-\newcommand{\reftable}[1]{Table.~\ref{#1}}
+%\newcommand{\reftable}[1]{Table.~\ref{#1}}
 \newcommand{\inblue}[1]{{\color{blue}#1}}
 \newcommand{\inred}[1]{{\color{red}#1}}
 \newcommand{\ingreen}[1]{{\color{green}#1}}
 
-\DeclareMathOperator{\sinc}{sinc}
+%\DeclareMathOperator{\sinc}{sinc}
 % \lstset{language=Python,
 %         keywordstyle=\color{blue}\textbf,
 % 	commentstyle=\color[rgb]{0.133,0.545,0.133},
@@ -71,6 +71,7 @@
                                   %   M - IUCrJ
                                   %   S - Journal of Synchrotron Radiation
 
+
 \begin{document}                  % DO NOT DELETE THIS LINE
 
 \title{Compensation of heat deformations by adaptive optics for the ALS upgrade}
@@ -78,9 +79,9 @@
 \author[a]{Manuel}{Sanchez del Rio}
 \cauthor[a]{Antoine}{Wojdyla}{awojdyla@lbl.gov}{}
 \author[a]{Kenneth A.}{Goldberg}
-\author[a]{Grant}{Cutler}
+\author[a]{Grant D.}{Cutler}
 \author[a]{Daniele}{Cocco}
-\author[a]{Howard}{Padmore}
+\author[a]{Howard A.}{Padmore}
 \aff[a]{LBNL, 1 Cyclotron Road, Berkeley CA, \country{USA}}
 
 \keyword{Adaptive X-ray Optics}\keyword{Soft X-rays, beamlines}\keyword{wave optics}\keyword{WOFRY}\keyword{Oasys}
@@ -397,7 +398,7 @@ d) $K_h=2.171,K_v=2.171, \Phi=90$ \textdegree.
 
 \subsection{Beamline simulation and effect of M1 deformation}
 
-\todo{Wavefront calculations are done at E=250 eV (K=2.924). FEA is for E=230.888 (K=3.07). Redo the plots for E=230.888. Calculate also the third harmonic.} 
+\todo{Wavefront calculations are done at E=250 eV (K=2.924). FEA is for E=230.888 (K=3.07). Redo the plots for E=230.888. Calculate also the FIFTH harmonic.} 
 
 The beamline simulation has been performed using WOFRY. The undulator field is calculated at a position just before M1 ($y$=13.73 m) using the model described in Section~\ref{sec:undulator}. M1 is a plane reflector that accepts a deformation profile. We first studied the case of no deformation. The wavefront is propagated from M1 to a distance 13.599 m in free space until M3 position using the zoom propagator (Section~\ref{sec:zoomPropagator}). Then M3 implements a reflector with a radius obtained from the lens equation $1/p + 1/q=1/f=2/R$ where $p=13.73+13.599$, $q=2.64$. With no deformation in M1 the image has a full-width at half maximum of 3.74 $\mu$m (Fig.~\ref{fig:nodeformation} and an intensity of 210 in arbitrary units, which will be then used to normalize intensities with the non-deformed case and calculate the Strehl ratio
 
@@ -419,9 +420,9 @@ We can conclude that the cryogenic cooling is almost perfect from the point of v
 
 \subsection{Adaptive X-ray Optics M3}
 
-The M3 mirror is an adaptive shaped mirror presenting a predefined elliptical shape with a bimorph mechanism that is able to modify the ellipse in the tangential direction (horizontal) to correct for possible deformations. It will work in close association with a wavefront sensor placed just upstream it. The control system will analyze the wave phase received from the wavefront sensor, calculate the distortion as a difference from the measured phase map and the ideal one, compute the mirror profile, calculate the inputs for the adaptive optics actuators that will shape the mirror to the calculated profile also accounting for additional effects (backend, dynamic effects).
+The M3 mirror is an adaptive shaped mirror presenting a predefined elliptical shape with a bimorph mechanism that is able to modify the ellipse in the tangential direction (horizontal) to correct for possible deformations. It will work in close association with a wavefront sensor placed just upstream it. The diagnostic system will analyze the wave phase received from the wavefront sensor, calculate the distortion as a difference from the measured phase map and the ideal one, compute the mirror profile, calculate the inputs for the adaptive optics actuators that will shape the mirror to the calculated profile also accounting for additional effects (backend, dynamic effects).
 
-The simulations use a widget application {\it WOFRY corrector (reflector)} that computes and applies the correction in the following way: i) it extracts the phase from the incident wave $\phi_{inc}(x)$, ii)  it calculates the phase spherical wave collapsing to this focal position $\phi_{sph}(x)$, given a distance to the waist (position where we want to focus), iii) calculate the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc}$, and iv) compute the profile height $h(w) = -\Delta \phi(w) / (2 k \sin \theta)$. Fig.\ref{fig:intensitycorrected}a shows the result using the corrected profiles added to the elliptical shape of the mirror. It is noticeable that the correction works perfectly, arriving to results in intensity distribution and Strehl ratio that are almost identical to case using the undeformed M1. The Strehl ratio has been calculated as the ratio of the peak intensity for the deformed M1 and corrected M3 mirrors over the peak intensity of the undeformed M1 and uncorrected M3. It may look paradoxal that the Strehl ratio is slightly bigger than one for the cases of water-cooled M1. The reason of this apparent contradiction is that M1 becomes convex due to the thermal load (See Figs.~\ref{fig:M1deformation}c$_2$ and d$_2$), therefore M3 sees the source farther away and refocuses increasing its curvature thus producing a new optical system with higher demagnification.   
+The simulations use a widget application {\it WOFRY corrector (reflector)} that computes and applies the correction in the following way: i) it extracts the phase from the incident wave $\phi_{inc}(x)$, ii)  it calculates the phase spherical wave collapsing to this focal position $\phi_{sph}(x)$, given a distance to the waist (position where we want to focus), iii) calculate the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc}$, and iv) compute the profile height $h(w) = -\Delta \phi(w) / (2 k \sin \theta)$. Fig.\ref{fig:intensitycorrected}a shows the result using the corrected profiles added to the elliptical shape of the mirror. It is noticeable that the correction works perfectly, arriving to results in intensity distribution and Strehl ratio that are almost identical to case using the undeformed M1. The Strehl ratio has been calculated as the ratio of the peak intensity for the deformed M1 and corrected M3 mirrors over the peak intensity of the undeformed M1 and uncorrected M3. It may look paradoxal that the Strehl ratio is slightly bigger than one for the cases of water-cooled M1. The reason of this apparent contradiction is that M1 becomes convex due to the thermal load (See Figs.~\ref{fig:M1deformation}c$_2$ and d$_2$), therefore M3 sees the source farther away and refocuses it by increasing its curvature thus producing a new optical system with higher demagnification and consequently higher Strehl ratio.   
 
 
    \begin{figure}
@@ -450,61 +451,78 @@ Correction profile on M2 (left) and intensity distribution (right) at the focal 
 
 
 The next question is whether the correcting profiles can be obtained from the real AXO. For that we need a realistic model of the adaptive mirror.
-Experimental data comes from the study of a mirror prototype manufactured by JTEC and tested at APS \todo{reference, experiment number?}. The mirror length is \inred{140 mm} and includes 18 actuators. The mirror profiles obtained by activating a single actuator were measured. The 18 profiles obtained are called influence functions. If we want to set a given arbitrary  profile in the mirror, we decompose this profile as a linear combination of the influence functions. The 18 coefficients constitute the input to the actuators.  
+We used experimental data from the study of a AXO mirror prototype manufactured by JTEC and tested at APS \todo{reference, experiment number?}. The mirror length is \inred{140 mm} and includes 18 actuators. The mirror profiles obtained by activating a single actuator were measured. The 18 profiles obtained are called influence functions. If we want to set a given arbitrary  profile in the mirror, we decompose this profile as a linear combination of the influence functions. The 18 coefficients constitute the input to the actuators.  
 We perform a Gram-Schmidt fitting of the correction profile on an orthonormal basis of AXO influence functions. The basis is computed from the 18 measured influence functions plus a constant term to account for path length changes, and a linear term to provide tilt capabilities. The correction profile is easily expressed as a linear combination of the orthonormal bases. The reconstructed profile built in this way constitutes the "realistic" profile that could be obtained by the AXO. Obviously not every profile could be obtained from the AXO system. For instance, our mirror of length $L$ with 18 actuators could not produce a sinusoidal profile with period smaller than $L/18$. 
 
-To accept the full beam the M3 mirror length should be 270 mm which is practically the double of the AXO mirror prototype used. There are three possible scenarios for implementing M3 with different performance. The first is get from the manufactures a single mirror which is practically a double replica of the studied prototype, i.e., a length of 2$\times$140 mm with 2$\times$18 actuators. This is the most expensive solution but we expect it would give the best results. A second possibility is to manufacture a mirror of 270 mm length with the same number of actuators placed in the same geometry. This mirror will be "non-adaptive" at the edges, but we may expect quite good results as usually the central ("adaptive") part receives a large amount of the intensity. A third situation would be to use the existing AXO prototype as M3 mirror.  
+To accept the full beam the M3 mirror length should be 270 mm which is practically the double of the AXO mirror prototype used. There are three possible scenarios for implementing AXO in M3. The first is get from the manufactures a single mirror which is practically a double replica of the studied prototype, i.e., a length of 2$\times$140 mm with 2$\times$18 actuators. This is the most expensive solution but we expect it would give the best results. We do not study this possibility as we do not have the necessary data. A second possibility is to manufacture a mirror of 270 mm length with the same number of actuators placed in the same geometry. This mirror will be "non-adaptive" at the edges, but we may expect quite good results as usually the central ("adaptive") part receives a large amount of the intensity. A third situation would be to use the existing AXO prototype as M3 mirror.  
 
-Fig.~\ref{fig:intensitycorrected}b$_1$ shows the intensity distribution when the adaptive M3 is using the "reasonable" mirror profiles built from the AXO orthonormal bases and extended to the needed dimension by extrapolating the edges. These profiles are shown in Fig.~\ref{fig:intensitycorrected}b$_2$. The correction obtained in this way is almost identical to the one obtained using the ideal correcting profiles. It is due to the fact that the edges of the mirror, that are obtained by extrapolation of the profile resulting from the expansion on the orthonormal basis, influence very little the intensity distribution. This results evidence the ability of the AXO to compensate for the non-negligible surface errors induced by heat load in M1. The case of using directly the existing AXO prototype for this beamline is also studied, in this case the mirror length is 140~mm and slightly crops the beam. This has two effects (see Fig.~\ref{fig:intensitycorrected}c) a reduction of the total intensity as the beam overfills the mirror losing part of its intensity and also low intensity diffraction fringes appear, as it can be appreciated around X=$\pm6.5\mu$m. These effects contribute to reduce the Strehl ratio to 0.8 in for all cooling conditions.
+In Fig.~\ref{fig:intensitycorrected} \inred{(left column)} one can see the different corrective profiles used for M3. 
+Fig.~\ref{fig:intensitycorrected}a$_1$ presents the ideal corrective profiles as needed for correcting perfectly the wavefront. Fig.~\ref{fig:intensitycorrected}b$_1$ shows the mirror profiles built from the AXO orthonormal bases and extended to the needed dimension by extrapolating the edges. Fig.~\ref{fig:intensitycorrected}c$_1$ shows the mirror profiles also decomposed in orthonormal bases but limited to the mirror length of the JTEC prototype measerued. In this case the mirror length is 140~mm and slightly crops the beam.
+The right column of the Figure shows the intensity distributions obtained with these profiles.
+The correction obtained using extrapolated profiles (Fig.~\ref{fig:intensitycorrected}b$_2$) is almost identical to the one obtained using the ideal correcting profiles (Fig.~\ref{fig:intensitycorrected}a$_2$). It is due to the fact that the edges of the mirror, that are obtained by extrapolation of the profile resulting from the expansion on the orthonormal basis, influence very little the intensity distribution. This results evidence the ability of the AXO to compensate for the surface errors induced by heat load in M1. The case of using directly the existing AXO prototype for this beamline (Fig.~\ref{fig:intensitycorrected}c$_2$) shows two effects: a reduction of the total intensity as the beam overfills the mirror losing part of its intensity; and also the creation of low intensity diffraction fringes around X=$\pm6.5\mu$m. These effects contribute to reduce the Strehl ratio to 0.8 independently of the selected cooling conditions.
 
 
 \subsection{Maximum deformation that the adaptive mirror can correct}
 
-It is interesting to study the limits of how much the AXO in M3 can correct an arbitrary deformation of M1. We simulated profiles to test the maximum deformation quantified in terms of curvature (simulate a "bump" profile) and in terms of spatial frequency (simulate a "sine"). 
+We study here the limits of how much the AXO in M3 can correct an arbitrary deformation of M1. We simulated profiles to test M1 deformations parametrized in terms of curvature (simulate a "bump" profile) and in terms of spatial frequency (simulate a "cosine"). 
 
-We simulate profiles with a "bump" (convex) or anti-bump (concave) (Fig.~\ref{fig:strehlRatioVersusR}). Notice that at large error radii (above 50 Km), the error is small and the Strehl Ratio is approximately one. For smaller radii, there are cases where the bump spreads the light at M3, and allowing the adaptive correction to achieve an effectively higher numerical aperture (NA). When that happens, the beam is focused to a smaller point in the exit slit plane and the intensity increases, leading to an apparent Strehl Ratio above one, however, integrated power is conserved. For concave bumps (Fig.~\ref{fig:strehlRatioVersusR}a) the correction fails around a radius of about 600 m when the deformation in M1 focuses the beam into M3.
+We created profiles with a "bump" (convex) or anti-bump (concave) (Fig.~\ref{fig:strehlRatioVersusR}a and b, respectively).
+For small errors (large curvature radii, above 50 Km), the changes in the intensity distribution are small and the Strehl Ratio is approximately one. For smaller radii, there are cases where the bump spreads the light at M3, allowing the adaptive correction to achieve an effectively higher numerical aperture (NA). When that happens, the beam is focused to a smaller point in the exit slit plane and the intensity increases, leading to an apparent Strehl Ratio above one. However, integrated power is conserved. For concave bumps (Fig.~\ref{fig:strehlRatioVersusR}a) the correction fails around a radius of about 600 m when the deformation in M1 focuses the beam into M3. As discussed before, there are situations in particular for radius of curvature less that 1 Km that the Strehl ration increses to levels much higher than one, due to the increase of NA. Figs.~\ref{fig:strehlRatioVersusR}c and d show the same calculations with the profiles expanded as a function of the AXO orthonormal bases and extrapolated to the needed mirror length. It shows a similar trend for high radii (small deformations) but contrary to what has been obtained for the ideal correcotors, the Strehl ratio now decreases for high curvatures. \todo{discuss why}. In particular the correction at E=250 eV demonstrated lack of efficiency for curvature radii less than 1 Km. 
 
   \begin{figure}
   \begin{center}
   \begin{tabular}{l} 
-
-
-  a) \\
-  \includegraphics[width=0.98\textwidth]{figures/flexon_ken_memo2_factor1.png} \\
-  b) \\
-  \includegraphics[width=0.98\textwidth]{figures/flexon_ken_memo2_factor-1.png} 
-
-
+  a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b) \\
+  \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor1.png}
+    \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor-1.png} 
+    \\
+      c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~d) \\
+  \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor1_fit.png}
+  \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor-1_fit.png} 
+  
   \end{tabular}
   \end{center}
   \caption
   { \label{fig:strehlRatioVersusR} 
-Variation of the Strehl ratio as a function of the deformation radius of curvature in M1 for concave curvature (a) and convex curvature (b) 
-\todo{change the figure to make more visible the limit SR=1}}
+Variation of the Strehl ratio as a function of the deformation radius of curvature in M1 for concave curvature (left) and convex curvature (right): a) concave deformation with ideal corrective profile, b) convex deformation with ideal corrective profile, c) concave deformation with corrective profile expressed as a function of AXO basis, and d) convex deformation with corrective profile expressed as a function of AXO basis.
+\todo{add grid in figure to make more visible the limit SR=1}}
   \end{figure} 
 
-\todo{discuss the correction with the fitted profile}
 
+Next, we studied a periodic deformation in M1 with a form of cosine. The cosine is selected for having a flat top at the mirror center (a sine would give an inflexion). It has been set an amplitude of the deformation of 20 nm independently of the period. We present in Fig.~\ref{fig:strehlRatioCosine} the results as a function of the number of ripples found in the mirror length. This means that the period of the cosinusoid is the mirror length over the number of ripples, and setting zero ripples for the undeformed profile (defining the normalizetion of Strehl ratio to one). Fig.~\ref{fig:strehlRatioCosine}a shows the Strehl ratio as a function of the number of ripples for the ideal correction. For the uncorrected profiles, the intensity distribution at the focal plane will feature satellite peaks as the deformation acts as a grating. These peaks are intense for only the first order at low energy (250 eV) but many orders are revealed at high energy (1250 eV). That makes that the curve (blue) for E=250 eV saturates above a Strehl ratio of 0.8 but goes doen to zero for E=1250 eV. When the correction is active, it manages to cancel the deformation with resulting Strehl ratio close to one (again, it could be higher than one when the intensity sreads over M3 incrementing the NA). When looking at the corrections produced by the profiles expressed as a function of the AXO ortonormal bases (Fig.~\ref{fig:strehlRatioCosine}b) we can appreciate that the correction is good for E=250 eV with a tendency to decrease for high number of ripples (inability of the limited number of actuators to follow the high frequency distortion) and also satisfactory for the case of E=1250 eV, but with oscillatory behaviour, showing that the AXO mirror can or not follow the oscillations produced by the different diffraction orders created. Again, it drops to lower values for high number of ripples, arriving to Strehl ration smaller than 0.8. 
 
-\todo{discuss the case of sinusoidal error with fitted profile}
+  \begin{figure}
+  \begin{flushleft}
+  a)\\
+  \includegraphics[width=0.95\textwidth]{figures/flexon_ken_memo2_cosine.png} \\
+  b)\\
+  \includegraphics[width=0.95\textwidth]{figures/flexon_ken_memo2_cosine_fit.png} \\
+  \end{flushleft}
 
+  \caption
+  { \label{fig:strehlRatioCosine} 
+Variation of the Strehl ratio for a deformation in form of cosine a) deformation compensated by the ideal corrective profile, b) deformation compensated by the corrective profile expressed as a function of AXO basis.
+}
+  \end{figure} 
+  
+  
 
 
 \section{Simulation of the full beamline}
 
 
-For completeness, we simulate the beamline in the vertical plane, featuring a grating monochromator. It consiste in a plane mirror M2 deflecting vertically, and a VLS grating that focus on the focal plane (exit slit). The role of M2 is to adjust the total deflecting angle of the monochromator (constant deflecting angle) when the VLS grating is rotated to chenge photon energy. For the simulations we can completely ignore it as it is not an optically active element given that i) it does not crop the beam, and ii) its surface is supposed to be perfect. The VLS grating is placed at 25.73 m from the source and 4.239 m from the focus. The parameters of the VLS optimized for working at E=250 eV are: $g_0$=300 lines/mm, $g_1=$  0.2698 mm$^{-2}$, and $g_3$=87748 10${^{-9}}$ mm$^{-3}$, and the angles are $\alpha$=87.239\textdegree and $\beta$=-85.829\textdegree. A numeric mesh covering the length of 150 mm is done with a step function (ruled grating) with 10 nm height (Fig.~\ref{fig:grating}a). The effect of the grating diffraction is calculated using the model described in Section~\ref{sec:grating}. The intensity distribution after the grating diffraction is in Fig.~\ref{fig:grating}b which shows a well-focused image with FWHM=4.18$\mu$m.
+For completeness, we simulate the beamline in the vertical plane, featuring a grating monochromator. It consiste in a plane mirror M2 deflecting vertically, and a VLS grating that focus on the focal plane (exit slit). The role of M2 is to adjust the total deflecting angle of the monochromator (constant deflecting angle) when the VLS grating is rotated to chenge photon energy. For the simulations we can completely ignore it as it is not an optically active element given that i) it does not crop the beam, and ii) its surface is supposed to be perfect. The VLS grating is placed at p=25.73 m from the source and q=4.239 m from the focus. The parameters of the VLS optimized for working at E=250 eV are: $g_0$=300 lines/mm, $g_1=$  0.2698 mm$^{-2}$, and $g_3$=87748 10${^{-9}}$ mm$^{-3}$, and the angles are $\alpha$=87.239\textdegree, $\beta$=-85.829\textdegree ~and $\theta=(\alpha-\beta)/2=$ = 86.534\textdegree ~(c=$\cos \beta / \cos \alpha$=1.51). A numeric mesh covering the length of 150 mm is done with a step function (ruled grating) with 10 nm height (Fig.~\ref{fig:grating}a). The effect of the grating diffraction is calculated using the model described in Section~\ref{sec:grating}. The intensity distribution after the grating diffraction is in Fig.~\ref{fig:grating}b which shows a well-focused image with FWHM=4.18$\mu$m.
 
 
   \begin{figure}
   \begin{center}
-  \begin{tabular}{l} 
+
   a)\\
-  \includegraphics[width=1\textwidth]{figures/grating.png} \\
+  \includegraphics[width=1\textwidth]{figures/grating.png} 
   b) \\
    \includegraphics[width=1\textwidth]{figures/intensitygrating.png}
 
-  \end{tabular}
+
   \end{center}
   \caption
   { \label{fig:grating} 
