@@ -93,8 +93,8 @@ xxx
 \end{synopsis}
 
 \begin{abstract}
-We develop and apply a realistic wave optics simulation method to correct wavefront distortions resulting from the thermal deformations using adaptive X-ray optics in high-brightness beamlines. Several planned soft X-ray and tender X-ray insertion-device beamlines in the Advanced Light Source upgrade, where wavefront preservation is paramount, rely on a common design principle. A flat, first mirror intercepts the white beam; vertical focusing is provided by a variable-line-space monochromator; and horizontal focusing comes from a single, pre-figured, adaptive mirror. 
-A variety of scenarios to cope with thermal distortion in the first mirror are implemented using finite-element analysis. We analyze the degradation of the intensity distribution at the focal plane and implement a model of the adaptive optics to correct it. We report the range of correctable wavefront errors across the operating range of the beamlines in terms of mirror curvature and spatial frequencies. The software implemented a one-dimensional wavefront propagation tool in the OASYS package, which is an adaptable, customizable and efficient beamline modeling platform well suited to study this issue.
+We develop a realistic wave optics simulation method to study how wavefront distortions originated by heat load deformations can be corrected using adaptive X-ray optics. Several planned soft X-ray and tender X-ray insertion-device beamlines in the Advanced Light Source upgrade rely on a common design principle. A flat, first mirror intercepts the white beam; vertical focusing is provided by a variable-line-space monochromator; and horizontal focusing comes from a single, pre-figured, adaptive mirror. 
+A variety of scenarios to cope with thermal distortion in the first mirror are studied by finite-element analysis. We analyze the degradation of the intensity distribution at the focal plane and model the adaptive optics that correct it. We report the range of correctable wavefront errors across the operating range of the beamlines in terms of mirror curvature and spatial frequencies. The software developed is a one-dimensional wavefront propagation package made available in the OASYS suite, which is an adaptable, customizable and efficient beamline modeling platform.
 \end{abstract}
 
 % Include a list of keywords after the abstract 
@@ -106,17 +106,16 @@ A variety of scenarios to cope with thermal distortion in the first mirror are i
 Quantitative calculation and evaluation of the parameters related to X-ray optics are of great importance for designing, building and exploiting new beamlines. These calculations allow testing of the design parameters in a virtual computer environment where advantages and limitations can be simulated accurately. The optics imperfections play a fundamental role in the simulations and often constitute the limiting factor of the beamline performances. Deformations of the optical elements due to heat load need to be always controlled and in some cases corrected, therefore optics simulations and engineering modeling of the thermal deformations by finite element analysis (FEA) have to be developed in parallel. 
 
 Simulations of the beamline optics can be done in different degrees of approximation and effort, starting using analytical formulas, performing ray tracing and also wavefront propagation \cite{hyerarchical}. Different packages for such simulations are available in the OASYS suite \cite{codeOASYS}. When the photon beams are mostly incoherent, the ray tracing technique is enough for most purposes. If the X-ray beam is highly coherent, like in soft X-ray beamlines of the upgraded ALS facility discussed in this paper, a pure wave optics simulation is sufficient. For 
-hard X-rays, where the coherent fraction for upgraded facilities is usually a few percent, simulations require using hybrid methods \cite{hybrid} and more sophisticated partial coherence algorithms such as Monte Carlo sampling \cite{Chubar2011b} or Coherent Mode Decomposition \cite{codeCOMSYL} are used. 
+hard X-rays, where the coherent fraction for upgraded facilities is usually a few percent, simulations require using hybrid methods \cite{hybrid} or more sophisticated partial coherence algorithms such as Monte Carlo sampling \cite{Chubar2011b} and Coherent Mode Decomposition \cite{codeCOMSYL}. 
 
 
 
-A common setup to be implemented in several ALS-U beamlines consists in a plane horizontal deflecting cooled mirror M1 to absorb a large part of the white beam power, followed by a horizontally focusing adaptive mirror M3, which focus and corrects wavefront errors. A variable-line-space (VLS) grating monochromator is placed in between to disperse and focus the beam in the vertical plane \todo{Ref Reininger?}, which is decoupled from the M1-M3 system. In this paper we study the ability of the adaptive mirror M3 to compensate for wavefront distortions caused by power load in M1. The white beam impinges on M1 after beam shaped by the high power slits, but the power released in the mirror system produce significative deformation of the mirror surface that degrades the beam quality. 
+A common setup to be implemented in several ALS-U beamlines consists in a horizontal deflecting cooled plane mirror M1 to absorb a large part of the white beam power, followed by a horizontally focusing adaptive mirror M3, which focus and corrects wavefront errors. A variable-line-space (VLS) grating monochromator is placed in between to disperse and focus the beam in the vertical plane \cite{reininger2005}, which is decoupled from the M1-M3 system. In this paper we study the ability of the adaptive mirror M3 to compensate for wavefront distortions caused by power load in M1. The white beam impinges on M1 after beam shaped by the high power slits, but the power released in the mirror system may produce significative deformation of the mirror surface that degrades the beam quality. 
 A variety of thermal distortion scenarios were implemented from finite-element analysis (FEA) models using realistic undulator power spectra and cooling strategies under consideration by the project.
-In the case of interest of ALS-U, the coherent fraction is high enough  to justify a full coherent optics calculation (about 0.8 for the case that we will study of a 4 m undulator at 250 eV). Moreover, in this case, as most times in synchrotron beamlines, the optics in the horizontal and vertical planes are decoupled thus a separated modeling of the horizontal and vertical planes is justified. The 1D modeling is orders of magnitude less demanding in computational resources than the conventional 2D calculations, therefore it is always recommended to start a wave optics simulation in its simpler form: a 1D model. We present here the fundamentals of a 1D wave propagation model implemented in the WOFRY \cite{codeWOFRY} tool in OASYS. 
+In the case of interest of ALS-U, the coherent fraction is high enough  to justify a full coherent optics calculation (about 0.8 for the case under study, a 4 m undulator at 250 eV). Moreover, in this case, as most times in synchrotron beamlines, the optics in the horizontal and vertical planes are decoupled thus a separated modeling of the horizontal and vertical planes is justified. The 1D modeling is orders of magnitude less demanding in computational resources than the 2D calculations, therefore it is always recommended to start a wave optics simulation in its simpler 1D form. We present here the fundamentals of a 1D wave propagation model implemented in the WOFRY \cite{codeWOFRY} tool in OASYS. 
 
-The 1D waveoptics propagation model is also well adapted to study optimization problems, because the scan of a single parameter or multiple optimization require running many single simulations. In our case, the live-optimization of the M3 optical profile is optimized and expressed as a function of the input signal required by the actuators that controls the optics. 
-After studying the performance of a 20-channel adaptive X-ray mirror prototype, at-wavelength and with visible-light, we implemented mirror shape-control algorithms in software that are designed to restore and optimize the focused beam intensity (i.e. Strehl ratio), considering the incident wavefront’s phase and amplitude.
-
+The 1D waveoptics propagation model is also well adapted to study optimization problems, because a parametric study (scan of a single variable) or multiple optimization require running many single simulations. In our case, the M3 correction profile is optimized and expressed as a function of the input signal required by the actuators that shape the optics. 
+Using data from a 20-channel adaptive X-ray mirror prototype we implemented mirror shape-control algorithms designed to restore and optimize the focused beam intensity (i.e., Strehl ratio).
 
 The paper is organised as follows: we first describe the methods and algorithms implemented in the WOFRY 1D simulations concerning the sources, wave propagators for free space, and optical elements and (section 2). In section 3 we describe the system under study, that corresponds to the parameters of the FLEXON beamline at ALS-U. The FEA results for M1 in terms of surface deformation originated by absorbed power are discussed. Finally, we show how the adaptive X-ray optics (AXO) can compensate the errors using an ad-hoc computed mirror profile compatible with the AXO control system. We end showing how the complete beamline can be simulated using a 1D wavefront propagation model by combining the results of the horizontal and vertical planes.  
 
@@ -128,7 +127,7 @@ The paper is organised as follows: we first describe the methods and algorithms 
 \section{Simplified 1D wavefront modeling for a synchrotron beamline}
 
 
-A wavefront simulation consists in the creation of a wavefront with some characteristics (geometry, wavelength), its propagation in free space and its modification by the optical elements (slits, mirrors, etc). We restrict here to a 1D model in the ($x,y$) plane, being $y$ the propagation direction (optical axis) and $x$ the direction transverse to the beam propagation to analyze (usually the of horizontal or vertical plane). The wavefront is represented by the electric field of a monochromatic component (angular frequency $\omega$, wavelength $\lambda$ or photon energy $W$) at a position $y$=0 along the propagation direction. This electric field or electric disturbance is a complex scalar $E(x;y=0,\omega)$ or, in case of polarized beams two complex scalars, one for $\sigma$ and the other for $\pi$ polarization. The wavefront intensity is the square of the modulus of the amplitude: $I=|A \exp{(i\phi)}|^2=A^2$. 
+A wavefront simulation consists in the creation of a wavefront with some characteristics (geometry, wavelength), its propagation in free space and its modification by the optical elements (slits, mirrors, etc). We restrict here to a 1D model in the ($x,y$) plane, being $y$ the propagation direction (optical axis) and $x$ the direction transverse to the beam propagation to analyze (usually the of horizontal or vertical plane). The wavefront is represented by the electric field of a monochromatic component (angular frequency $\omega$, wavelength $\lambda$, wavenumber $k = 2 \pi / \lambda$ or photon energy $W$) at a position $y$=0 along the propagation direction. This electric field or electric disturbance is a complex scalar $E(x;y=0,\omega)$ or, in case of polarized beams two complex scalars, one for $\sigma$ and the other for $\pi$ polarization. The wavefront intensity is the square of the modulus of the amplitude: $I=|A \exp{(i\phi)}|^2=A^2$. 
 
 \subsection{Modeling sources}
 \label{sec:sources}
@@ -141,7 +140,7 @@ The simplest wavefront corresponds to a plane wave, that has constant complex am
 \end{equation}
 where $E_0$ is a complex value that can be expressed in its constant real  amplitude $A_0$ and a constant phase $\phi_0$. A plane wave is infinite along the $x$ direction. However, when implementing a wavefront in a computer the electric field has to be sampled over an array of discrete values of complex amplitude, and they are necessarily defined over a finite $x$ interval. 
 
-A spherical wave (strictly speaking a circular wave in 1D, but we keep the terminology used in 2D) has a constant complex amplitude over a sphere of a given radius $R$. Obviously it cannot be represented at the source point ($y=0$, center of the sphere) and our wavefront must be sampled at a given distance $y=R$ and over a line perpendicular to the radius and tangent to the sphere. At $x=0$ (a point in the sphere) the field has a constant value equal to the value at the surface. But at a x$\ne$0, over a range of x-values $x<<R$ (small numerical apertures) the distance from $x$ to the sphere parallel to the $y$ direction gives an optical path that modifies the phase by $k \Delta x$ with $k$ the wavenumber ($k = 2 \pi / \lambda$). It is easy to deduce that the wavefront in the line tangent to the sphere has the expression
+A spherical wave (strictly speaking a circular wave in 1D, but we keep the terminology used in 2D) has a constant complex amplitude over a sphere of a given radius $R$. Obviously it cannot be represented at the source point ($y=0$, center of the sphere) and our wavefront must be sampled at a given distance $y=R$ and over a line perpendicular to the radius and tangent to the sphere. At $x=0$ (a point in the sphere) the field has a constant value equal to the value at the surface. But at a $x\ne$0, over a range of $x$-values $x<<R$ (small numerical apertures) the distance from $x$ to the sphere parallel to the $y$ direction gives an optical path that modifies the phase by $k ~\Delta x$. It is easy to deduce that the wavefront in the line tangent to the sphere has the expression
 \begin{equation}
 \label{eq:sphericalWave}
     E(x;y=R,\omega)  = E_0 e^{i k x^2 / (2 R)}.
@@ -153,6 +152,7 @@ A spherical wave (strictly speaking a circular wave in 1D, but we keep the termi
 
 A Gaussian beam has intensity following a Gaussian distribution with standard deviation $\sigma_I$, thus the electric disturbance is: 
 \begin{equation}
+\label{eq:gaussianSource}
     E(x;y=0,\omega) = E_0 e^{-x^2 / (4 \sigma_I^2)}
 \end{equation}
 
@@ -163,44 +163,78 @@ A Gaussian beam has intensity following a Gaussian distribution with standard de
 A single electron (or filament beam) traveling in an undulator with pure sinusoidal magnetic field in one direction will produce a complicated wavefront with geometry that varies as a function of the photon frequency (see, e.g., Ref.~\cite{elleaume}). At the resonance energy the emission in the far field can be approximated by a Gaussian of width \cite{elleaume}
 \begin{equation}
 \label{eq:undulatorDivergence}
-    \sigma' = \sqrt{\frac{\lambda}{2 L}}
+    \sigma'_u \approx\sqrt{\frac{\lambda}{2 L}},
 \end{equation}
-with $\lambda$ the wavelength of the photons at the undulator resonance and $L$ the undulator length. 
-
-A useful simplification of the undulator radiation consists in a spherical wave (Eq.\ref{eq:sphericalWave}) with origin in the undulator center modulated with an amplitude that follows the Gaussian in Eq.~\ref{eq:undulatorDivergence}
+with $\lambda$ the wavelength of the photons at the undulator resonance and $L$ the undulator length. At the source point, the size of the source can also be approximated by a Gaussian of
 \begin{equation}
-    E(x;y=y_0,\lambda) = E_0 e^{i k x^2 / (2 y_0)} e^{-x^2/(4 \sigma'^2 y_0^2)}
+\label{eq:undulatorSize}
+    \sigma_u \approx\sqrt{\frac{\lambda L}{2 \pi^2}} = \frac{\lambda}{2 \pi} \frac{1}{\sigma'}.
 \end{equation}
 
+A  simplification of the undulator radiation in the far field consists in a spherical wave (Eq.\ref{eq:sphericalWave}) with origin in the undulator center modulated with an amplitude that follows the Gaussian in Eq.~\ref{eq:undulatorDivergence}, therefore
+\begin{equation}
+    \label{eq:undulatorBySphericalWave}
+    E(x;y=y_0,\lambda) = E_0 e^{i k x^2 / (2 y_0)} e^{-x^2/(4 \sigma'_u^2 y_0^2)}.
+\end{equation}
+
+A second way to simulate the undulator is considering a Gaussian source as defined in Eq.~\ref{eq:gaussianSource} with $\sigma_I=\sigma_u$. Note that propagating this approximation of the undulator as a Gaussian source to a screen at $y=y_0$ does not reproduce the result in Eq.~\ref{eq:undulatorBySphericalWave} because Gaussian propagation implies a product of sigmas (emittance) of $\lambda / (4 \pi)$ whereas for undulator radiation the emittance is approximately $\lambda / (2 \pi)$ (Eq.~\ref{eq:undulatorSize}). For practical purposes, the Gaussian source approximation can be used for optical systems accepting a high numerical aperture (NA) whereas for systems of small NA the spherical way approximations may be preferred.
 
 
 \subsection{Modeling propagation in free space}
 \label{sec:propagation}
 
-For simulating the beamline, the wavefront at the source has to be created using the methods in Section \ref{sec:sources}, and the iterative effect of the optical elements has to be simulated using the results in yhe next section \ref{sec:elements}. But the wavefront changes when transported in free space from element to element. The Fresnel propagator \cite{goodmanfourier} gives a recipe to compute the transported wavefield at a position $y_1$ as a function of the wavefield at position $y_0$
+For simulating the beamline, the wavefront at the source has to be created using the methods in Section \ref{sec:sources}, and the iterative effect of the optical elements has to be simulated using the results in the next section \ref{sec:elements}. But the wavefront changes when transported in free space from element to element. We use here two propagators. 
+
+\subsubsection{Direct implementation of integral Rayleigh-Sommerfeld propagator}
+\label{sec:integralPropagator}
+%
+The Rayleigh-Sommerfeld propagator for small-angle approximation expresses the electric field at a spatial point $\vec{r}'$ as an integral of the electric field at a spatial point $\vec{r}$ \cite{goodmanfourier}
+\begin{equation}\label{eq:RSpropagator}
+E(\vec{r}') =  \frac{k}{2 \pi i} \int \frac{E(\vec{r})}{|\vec{r}'-\vec{r}|} e^{ i k |\vec{r}' - \vec{r}|  }  d\Sigma,
+\end{equation}
+where the integral is made over the domain of the source (the surface $\Sigma$). 
+This propagator can be applied to numerical discrete 1D wavefronts when propagating a distance $\Delta y$, and the integral reduces to a sum
+
+
+\begin{equation}\label{eq:discreteRSpropagator}
+E(x_1,y_1) = \frac{k}{2 \pi i}  \sum_{i=0}^{N-1}  \frac{E(x_{0,i},y_{0,i}) e^{i k \sqrt{(x_1 - x_{0,i})^2 + (y_1 - y_{0,i})^2} }}{\sqrt{(x_1 - x_{0,i})^2 + (y_1 - y_{0,i})^2}}  \Delta x_0
+\end{equation}
+
+Note that one sum over the $N$ points of the sampled incident wavefront has to be done for each coordinate at the transported wavefront, thus the number of operations is of the order $N^2$. This simple propagator gives flexibility to define different gridding and limits for the incident and transported wavefronts, permitting to adjust the window and resolution when working with converging or divergent wavefronts. 
+
+
+\subsubsection{Fresnel propagator using FFT: The zoom propagator}
+\label{sec:zoomPropagator}
+
+
+By making a Taylor expansion of the quadratic phase in \ref{eq:RSpropagator} the Fresnel propagator is obtained: 
 
 \begin{equation}\label{eq:fresnelPropagator}
 E(x;y_1) =  \frac{e^{i k (y_1-y_0)}}{\sqrt{i \lambda (y_1-y_0)}} \int E(x';y_0) e^{ \frac{i k}{2 (y_1-y_0)}  (x-x')^2  }  dx'.
 \end{equation}
 
-\subsubsection{Direct implementation of Fresnel propagator by integrals}
-\label{sec:integralPropagator}
+% For discrete wavefronts this integral reduces to
+% \begin{equation}\label{eq:discretefresnel1D}
+% E(x;y_1) = \frac {e^{i k (y_1-y_0) }}{ \sqrt{i \lambda (y_1-y_0)}} \sum_{i=0}^{N-1}  E(x^\prime_i; y_0) e^{i \frac{k}{2 (y_1-y_0)} (x - x_i^\prime)^2 } \delta_i x^\prime
+% \end{equation}
 
-Eq.~\ref{eq:fresnelPropagator} can be applied to numerical discrete wavefronts, and the integral reduces to a sum
-\begin{equation}\label{eq:discretefresnel1D}
- E(x;y_1) = \frac {e^{i k (y_1-y_0) }}{ \sqrt{i \lambda (y_1-y_0)}} \sum_{i=0}^{N-1}  E(x^\prime_i; y_0) e^{i \frac{k}{2 (y_1-y_0)} (x - x_i^\prime)^2 } \delta_i x^\prime
-\end{equation}
-Note that one sum over the $N$ points of the sampled incident wavefront has to be done for each coordinate at the transported wavefront, thus the number of operations is of the order $N^2$. This simple propagator gives flexibility to define different gridding and limits for the incident and transported wavefronts, permitting to adjust the window and resolution when working with converging or divergent wavefronts. 
+%Note that one sum over the $N$ points of the sampled incident wavefront has to be done for each coordinate at the transported wavefront, thus the number of operations is of the order $N^2$. This simple propagator gives flexibility to define different gridding and limits for the incident and transported wavefronts, permitting to adjust the window and resolution when working with converging or divergent wavefronts. 
+%
 
-\subsubsection{Fresnel propagator using FFT: The zoom propagator}
-\label{sec:zoomPropagator}
 
-The Fresnel integral propagator in Eq.~\ref{eq:fresnelPropagator} can be seen as convolution of the wavefield with a Gaussian kernel.    
+%The Fresnel propagator \cite{paganin} gives a recipe to compute the transported wavefield at a position $y_1$ as a function of the wavefield at position $y_0$
+%
+%\begin{equation}\label{eq:fresnelPropagator}
+%E(x;y_1) =  \frac{e^{i k (y_1-y_0)}}{\sqrt{i \lambda (y_1-y_0)}} \int E(x';y_0) e^{ \frac{i k}{2 (y_1-y_0)}  (x-x')^2  }  dx'.
+%\end{equation}
+
+
+The Fresnel integral propagator can be seen as convolution of the wavefield with a Gaussian kernel. 
 One can write Equation \ref{eq:fresnelPropagator} in convolution form, involving two-Fourier transforms:
 \begin{equation}\label{eq:fft}
 E(x; y_1) = \mathcal{F}^{-1}\Big\{ \mathcal{F}\{E(x; y_0)\} \times e^{-i \pi \lambda (y_1-y_0) u^2} \Big\}.
 \end{equation} 
-where the exponential function comes from the back-Fourier of the exponential inside the integral in Eq.~\ref{eq:discretefresnel1D}, being $u$ the conjugated variable of $x$. 
+where the exponential function comes from the back-Fourier of the exponential inside the integral in Eq.~\ref{eq:fresnelPropagator}, being $u$ the conjugated variable of $x$. 
 The real benefit of using this scheme comes from the use of Fast Fourier Transforms, that reduce the number of operations from $N^2$ to $N \log_2 N$. Its use is essential when doing simulations in 2D, because the direct calculation of the integral lead to $N^4$ operations at the limit of calculation power of usual laptop computers. However, the FFT implementation requires that the gridding and window of the incident and transported wavefronts must be equal. This is a problem when a wavefront is propagated to a waist: the gridding of the incident wavefront used at the image provides a poor resolution because most of the intensity is concentrated in a very few pixels. A clever solution to this problem is presented by J.D. Schmidt \cite{schmidt} that makes possible to calculate the propagated field in a ``zoomed'' window, thus permitting optimizing the wavefront sampling in cases for propagating highly convergent or divergent wavefronts. The problem reduces to a convolution problem of the unpropagated field field $E(x;y_0)$ affected by a phase $P$ with a kernel $K$, and the result affected by a global phase $P^G$: 
 \begin{equation}
 E(x; y_1) = P^G \mathcal{F}^{-1} \Big\{ \mathcal{F} \big\{ E~~P \big\} K \Big\},
@@ -216,7 +250,7 @@ P = e^{i \frac{k}{2(y_1-y_0)} (1-m_x)x_1^2 } \\
 K = e^{-i \pi \lambda (y_1-y_0) \frac{u^2}{m_x} }.
 \end{equation}
 The term $m_x$ is the magnification (zoom) factor. 
-Note that setting one magnification $m_x=1$ one obtains the standard Fresnel propagator (Eq.~\ref{eq:fft}). \todo{check square root}
+Note that setting one magnification $m_x=1$ one obtains the standard Fresnel propagator (Eq.~\ref{eq:fft}).
 
 \subsection{Modeling optical elements}
 \label{sec:elements}
