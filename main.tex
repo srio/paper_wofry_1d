@@ -16,7 +16,6 @@
 \usepackage[normalem]{ulem}
 
 
-
 % \documentclass[a4paper,10pt]{article}
 % \usepackage[utf8]{inputenc}
 % \usepackage[]{graphicx}
@@ -84,7 +83,7 @@
 \author[a]{Howard A.}{Padmore}
 \aff[a]{LBNL, 1 Cyclotron Road, Berkeley CA, \country{USA}}
 
-\keyword{Adaptive X-ray Optics}\keyword{Soft X-rays, beamlines}\keyword{wave optics}\keyword{WOFRY}\keyword{Oasys}
+\keyword{Adaptive X-ray Optics}\keyword{Soft X-rays, beamlines}\keyword{wave optics}\keyword{WOFRY}\keyword{OASYS}
  
 \maketitle
 
@@ -193,21 +192,21 @@ The Rayleigh-Sommerfeld propagator for small-angle approximation expresses the e
 E(\vec{r}') =  \frac{k}{2 \pi i} \int \frac{E(\vec{r})}{|\vec{r}'-\vec{r}|} e^{ i k |\vec{r}' - \vec{r}|  }  d\Sigma,
 \end{equation}
 where the integral is made over the domain of the source (the surface $\Sigma$). 
-This propagator can be applied to numerical discrete 1D wavefronts when propagating a distance $\Delta y$, and the integral reduces to a sum
+This propagator can be applied to numerical discrete 1D wavefronts, and the integral reduces to a sum
 
 
 \begin{equation}\label{eq:discreteRSpropagator}
-E(x_1,y_1) = \frac{k}{2 \pi i}  \sum_{i=0}^{N-1}  \frac{E(x_{0,i},y_{0,i}) e^{i k \sqrt{(x_1 - x_{0,i})^2 + (y_1 - y_{0,i})^2} }}{\sqrt{(x_1 - x_{0,i})^2 + (y_1 - y_{0,i})^2}}  \Delta x_0
+E(x_1,y_1) \approx \frac{k}{2 \pi i \Delta y}  \sum_{i=0}^{N-1}  E(x_{0,i},y_{0,i}) e^{i k \sqrt{(x_1 - x_{0,i})^2 + (y_1 - y_{0,i})^2} }  \Delta x_0
 \end{equation}
-
-Note that one sum over the $N$ points of the sampled incident wavefront has to be done for each coordinate at the transported wavefront, thus the number of operations is of the order $N^2$. This simple propagator gives flexibility to define different gridding and limits for the incident and transported wavefronts, permitting to adjust the window and resolution when working with converging or divergent wavefronts. 
+where $\Delta y$ is the mean value of the denominator in the integral in Eq.~\ref{eq:RSpropagator}.
+Note that one sum over the $N$ points of the sampled incident wavefront has to be done for each coordinate at the transported wavefront, thus the number of operations is of the order $N^2$. This simple propagator gives flexibility to define different gridding and limits and even non parallel planes for the incident and transported wavefronts, permitting to adjust the window and resolution when working with converging or divergent wavefronts. 
 
 
 \subsubsection{Fresnel propagator using FFT: The zoom propagator}
 \label{sec:zoomPropagator}
 
 
-By making a Taylor expansion of the quadratic phase in \ref{eq:RSpropagator} the Fresnel propagator is obtained: 
+By making a Taylor expansion of the quadratic phase in Eq.~\ref{eq:RSpropagator} the Fresnel propagator is obtained: 
 
 \begin{equation}\label{eq:fresnelPropagator}
 E(x;y_1) =  \frac{e^{i k (y_1-y_0)}}{\sqrt{i \lambda (y_1-y_0)}} \int E(x';y_0) e^{ \frac{i k}{2 (y_1-y_0)}  (x-x')^2  }  dx'.
@@ -235,7 +234,7 @@ One can write Equation \ref{eq:fresnelPropagator} in convolution form, involving
 E(x; y_1) = \mathcal{F}^{-1}\Big\{ \mathcal{F}\{E(x; y_0)\} \times e^{-i \pi \lambda (y_1-y_0) u^2} \Big\}.
 \end{equation} 
 where the exponential function comes from the back-Fourier of the exponential inside the integral in Eq.~\ref{eq:fresnelPropagator}, being $u$ the conjugated variable of $x$. 
-The real benefit of using this scheme comes from the use of Fast Fourier Transforms, that reduce the number of operations from $N^2$ to $N \log_2 N$. Its use is essential when doing simulations in 2D, because the direct calculation of the integral lead to $N^4$ operations at the limit of calculation power of usual laptop computers. However, the FFT implementation requires that the gridding and window of the incident and transported wavefronts must be equal. This is a problem when a wavefront is propagated to a waist: the gridding of the incident wavefront used at the image provides a poor resolution because most of the intensity is concentrated in a very few pixels. A clever solution to this problem is presented by J.D. Schmidt \cite{schmidt} that makes possible to calculate the propagated field in a ``zoomed'' window, thus permitting optimizing the wavefront sampling in cases for propagating highly convergent or divergent wavefronts. The problem reduces to a convolution problem of the unpropagated field field $E(x;y_0)$ affected by a phase $P$ with a kernel $K$, and the result affected by a global phase $P^G$: 
+The real benefit of using this scheme comes from the use of Fast Fourier Transforms, that reduce the number of operations from $N^2$ to $N \log_2 N$. Its use is essential when doing simulations in 2D, because the direct calculation of the integral lead to $N^4$ operations at the limit of calculation power of usual laptop computers. However, the FFT implementation requires that the gridding and window of the incident and transported wavefronts must be equal. This is a problem when a wavefront is propagated to a focal point: the gridding of the incident wavefront used at the image provides a poor resolution because most of the intensity is concentrated in a very few pixels. A clever solution to this problem is presented by J.D. Schmidt \cite{schmidt} that makes possible to calculate the propagated field in a ``zoomed'' window, thus permitting optimizing the wavefront sampling in cases for propagating highly convergent or divergent wavefronts. The problem reduces to a convolution problem of the unpropagated field field $E(x;y_0)$ affected by a phase $P$ with a kernel $K$, and the result affected by a global phase $P^G$: 
 \begin{equation}
 E(x; y_1) = P^G \mathcal{F}^{-1} \Big\{ \mathcal{F} \big\{ E~~P \big\} K \Big\},
 \end{equation}
@@ -255,7 +254,7 @@ Note that setting one magnification $m_x=1$ one obtains the standard Fresnel pro
 \subsection{Modeling optical elements}
 \label{sec:elements}
 
-In many cases, the optical elements can be considered in a good approximation as thin elements (zero thickness along the $y$ axis), therefore their effect can be encapsulated in a complex transmission amplitude 
+In some cases, the optical elements can be considered in a good approximation as thin elements (zero thickness along the $y$ axis), therefore their effect can be encapsulated in a complex transmission amplitude 
 \begin{equation}
     \label{eq:thinelement}
     R(x;\omega)=r(x;\omega) e^{i \rho(x,\omega)}.
@@ -302,18 +301,14 @@ If the reflector is set with an incident angle $\theta$ with the propagation axi
     R(x;\omega) = e^{-2 i k h(x/\sin \theta) \sin \theta}
 \end{equation} 
 
-This model of ideal reflector can be used for any reflecting shape (circular, ellipse) but the intrinsic aberrations are not correctly considered. For example. if we consider a circular mirror, then $h(w) \approx (1/2) (w/R)^2$ and when inserted in Eq.~\ref{eq:idealReflector} it introduces a quadratic phase thus focusing perfectly a plane wave into a collapsing spherical wave. We know this is not true as there are aberration (spherical aberration, coma, etc.) that are ignored by this model. The main reason is the incidence angle $\theta$, which is not constant along the mirror profile thus Eq.~\ref{eq:idealReflector} is not exact.
+This model of ideal reflector as a thin object  can be used for any reflecting shape (circular, ellipse) but the intrinsic aberrations are not correctly considered. For example. if we consider a circular mirror, then $h(w) \approx (1/2) (w/R)^2$ and when inserted in Eq.~\ref{eq:idealReflector} it introduces a quadratic phase thus focusing perfectly a plane wave into a collapsing spherical wave. We know this is not true as there are aberration (spherical aberration, coma, etc.) that are ignored by this model. The main reason is the incidence angle $\theta$, which is not constant along the mirror profile thus Eq.~\ref{eq:idealReflector} is not exact. A model for a "grazing reflector" that solves this problem is presented in the next Section \ref{sec:grazingReflector}.
 
 A reflector of a finite size can be decomposed in two elements, the ideal reflector described here followed (or preceded) by the aperture as described in \ref{sec:aperture}.
 
 \subsubsection{Grazing reflector}
 \label{sec:grazingReflector}
 
-As just mentioned, the method used for the {\it ideal reflector} does not account for mirror aberrations and also has problems with dealing with mirror errors. These effects are more important for elements in grazing incidence, where the {\it thin object} approximation is not valid. A solution for that consists in using the propagator in Sec.~\ref{sec:integralPropagator} to the points in the mirror surface $(w,h)$. Let be $p$ the distance from the wavefront $E_0(x,;y=0,\omega)$ to the center of the mirror placed at a grazing incidence $\theta$ with the optical axis. In the mirror reference frame, the wavefront coordinates are $(w_s, h_s) =(-p \cos \theta, p \sin \theta) + (x \sin \theta, x \cos \theta,)$. It is straightforward to extend the integral propagator (Eq.~\ref{eq:discretefresnel1D}) to calculate the propagated field at the surface points $(w,h)$ by summing over all points of the input wavefront. 
-\begin{equation}\label{eq:grazingPropagator}
- E(w,h) = \frac {e^{i k p }}{ \sqrt{i \lambda p}} \sum_{i=0}^{N-1}  E(w_{s,i},h_{s,i}) e^{i k \sqrt{(w - w_{s,i})^2 + (h - h_{s,i})^2]}} \delta_i w_s
-\end{equation}
-Once known the electric perturbation at the mirror surface, another propagation is done using the same principle to the image plane placed at a distance $q$ from the  mirror center. \todo{This propagatior (Kirchhoff) is not the one in Eq. 7. Change to Fresnel? Explain? Add also constant term in the code}
+The method used for the {\it ideal reflector} does not account for mirror aberrations and also has problems with dealing with mirror errors. These effects are more important for elements in grazing incidence, where the {\it thin object} approximation is not valid. A solution for that consists in using the propagator in Sec.~\ref{sec:integralPropagator} to propagate the incident wavefront until the points in the mirror surface $(w,h)$. Let be $p$ the distance from the wavefront $E_0(x,;y=0,\omega)$ to the center of the mirror placed at a grazing incidence $\theta$ with the optical axis. In the mirror reference frame, the wavefront coordinates are $(w_s, h_s) =(-p \cos \theta, p \sin \theta) + (x \sin \theta, x \cos \theta,)$. It is straightforward to extend the integral propagator (Eq.~\ref{eq:discreteRSpropagator}) to calculate the propagated field at the surface points $(w,h)$ by summing over all points of the input wavefront. Once known the electric perturbation at the mirror surface, another propagation is done using the same principle to the image plane placed at a distance $q$ from the  mirror center. 
 
 \subsubsection{Gratings}
 \label{sec:grating}
@@ -326,7 +321,7 @@ with $\alpha$ is the incidence angle (measured with respect to the normal), $\be
 %(note than in SHADOW is the contrary, inside orders are negative)
 $\lambda$ is the photon wavelength, and $g$ is the grating groove density, which is a function of $w$ for VLS gratings: $g = g_0 + g_1 w + g_2 w^2 + ...$ with $g_0 = 1/d_0$ the lines per unit of length at the grating center ($d_0$ the distance between two grating lines).
 
-The simulation of a grating is complicated using a thin object model (Eq.~\ref{eq:idealReflector}) because in addition to the geometric optical path it is necessary to account for the wavelength-dependent component. We used an approach that is exact, except for accounting for grating efficiency, consisting in sampling the grating as a numeric mesh and apply the {\it grazing reflector}. It is important not to undersample the grating (e.g., include several points per "line") and orientate the incident and image wavefronts with the correct angles $\alpha$ and $\beta$.      
+The simulation of a grating using a thin object model (Eq.~\ref{eq:idealReflector}) is difficult because in addition to the geometric optical path it is necessary to account for the wavelength-dependent component. We use here an approach that is exact, except for accounting for grating efficiency, which consisting in sampling the grating as a numeric mesh and apply the "grazing reflector. It is important not to undersample the grating (e.g., include several points per period) and orientate the incident and image wavefronts with the correct angles $\alpha$ and $\beta$.      
 
 \todo{  Test figure showing i) focusing with a spherical mirror implemented with the ideal reflector (no aberrations) and the grating reflector (it does account for aberration), and ii) a VLS grating that focus and corrects or not for coma}
 
@@ -337,34 +332,25 @@ Four new undulator beamlines are being designed for the ALS-U project. The diffe
 
 The goal of this paper is to study whether this AXO permits to correct the distortions produced by the heating and deformation of M1.
 
-Total power $P$ emitted by an undulator is: 
+The total power $P$ emitted by an undulator is 
 \begin{equation}
-    P [W] = 72.56  (E_e [GeV])^2  I[A]  N_u  K^2 / \Lambda[mm]
+    P [W] = 72.5688  (E_e [GeV])^2  I[A]  N_u  K^2 / \Lambda[mm],
 \end{equation}
 % The peak of power density $D_P$ (on axis  value) in a planar undulator is (see, e.g., [1]): 
 % \begin{equation}
 % D_P [\mbox{W/mrad}^2] = 116.18   (E_e [GeV])^4  I[A]  N_u  K  G(K) / \Lambda[mm]
 % \end{equation}
 % where $G(K)$ is a function that can be approximated to one for $K>0.8$, 
-where $K$ is the undulator deflecting parameter, $N_u$ the number of periods, $\Lambda$ the undulator period, $I$ is the storage ring current, and $E_e$ is the storage ring energy. 
-
-From these equation we can deduce that the maximum of power is obtained at maximum of K corresponding to the minimum of the energy for a given harmonic.  We have selected the case of the FLEXON beamline because the insertion device delivers a high power and the beamline design follows the structure already described. Therefore, it constitutes the worst case that requires the most demanding actions to minimize the deformations (in M1) and correct the distortions (in M3). The FLEXON beamline will incorporate a Delta undulator \cite{deltaundulator} with $\lambda=$28.8 mm, $N_u=$137 and $K_{max}=$ 3.07, emitting a total power of $P=$6507 W in ALS-U ring (2 GeV,  0.5 A).
+where $K$ is the undulator deflecting parameter, $N_u$ the number of periods, $\Lambda$ the undulator period, $I$ is the storage ring current, and $E_e$ is the storage ring energy. From this equation we can deduce that the maximum of power is obtained at maximum of $K$ corresponding to the minimum of the energy for a given harmonic.  We have selected the case of the FLEXON beamline because the insertion device delivers a high power and the beamline design follows the structure already described. Therefore, it constitutes the worst case that requires the most demanding actions to minimize the deformations (in M1) and correct the distortions (in M3). The FLEXON beamline will incorporate a Delta undulator \cite{deltaundulator} with $\lambda=$28.8 mm, $N_u=$137 and $K_{max}=$ 3.07, emitting a total power of $P=$6507 W in ALS-U ring (2 GeV,  0.5 A).
 
 \subsection{Deformation of M1 due to heat load}
 
 %The M1 Au-coated mirror is at a distance D=13.73 m from the source. Two different cooling schemes are studied, one using liquid nitrogen (LN) and another using water. In both cases the The geometry of the mirror substrate, the clamping mechanisms and even the mirror dimensions are different for the two cases \todo{add reference or internal report?}. For the cryogenically cooled mirror, the mirror dimensions are 500 $\times$ 100 mm$^2$. It receives 3750 W with a peak power density of 1.60 W/mm$^2$. \todo{I get 6546 W using the equation above} The beam is cropped by an entrance slit to select $\pm 3 \sigma$ of the central cone at the at first harmonic (E=231 eV). In the case of water cooling, the mirror is smaller with a dimension $\pm 4 \sigma$. 
 
-The white beam mirror M1 is placed at a distance 13.73 m from the source, has a grazing angle of 1.25\textdegree, and is gold coated. The distribution of the heat load on the mirror depends on undulator parameters (deflection parameter horizontal $K_h$, vertical $K_v$ and phase $\Phi$). Depending on the polarization wanted, these parameters take different values (horizontal linear polarization $K_h=0$, vertical linear polarization $K_v=0$, linear polarizartion at 45\textdegree $K_h=K_v$, $\Phi=0$, circular polarization $K_h=K_v$, $\Phi=90$\textdegree ). In Fig.~\ref{fig:M1powerdensity} the incident power density is plotted for $K=\sqrt{K_h^2 + K_v^2}=3.07$ in various polarization states.
-
-The absorbed power density can be computed by any one of several methods, for example using the SPECTRA code with the absorption curve calculated for the mirror's grazing angle and coating \cite{codeSPECTRA}.  The peak absorbed power density on the mirror is 1.01 W/mm$^2$. The total absorbed power in a $\pm 3 \sigma$ aperture is approximately 239 W, where $\sigma$ is the width of the spatial distribution of the first harmonic at $K=3.07$, corresponding to an energy of 231 eV.
-
-We compute the distortion of the mirror using the finite element method, as implemented in the ANSYS software. The result of the finite element calculation is a map of the surface deformation for a given heat load and mirror design. Fig.~\ref{fig:M1deformation} shows the deformation maps (column 1) and the extracted profile (column 2). The map was loaded in OASYS using a dedicated widget that also extracts the 1D profile and send it to the reflector.
-
-We calculated distortions for two different cooling schemes: a water-side-cooled mirror and a liquid-nitrogen-cooled mirror \todo{ref paper on this, Cutler et. al.}. Both mirrors are made from single-crystal-silicon substrates. In the case of the water-side-cooled mirror, we controlled distortion by a combination of mirror design parameters, specifically beam overfilling, a notched or smart-cut substrate, and tuned cooling length \todo{ref Zhang, Khounsary, others}.  Note that we did not optimize these parameters for to minimize height or slope error, but instead chose parameters for a range of heat loads, and to facilitate adaptive correction.
-
-It is important to note that our water-cooled finite element model does not include a mounting or cooling system, and therefore the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
+The white beam mirror M1 is placed at a distance 13.73 m from the source, has a grazing angle of 1.25\textdegree, and is gold coated. The distribution of the heat load on the mirror depends on undulator parameters (deflection parameter horizontal $K_h$, vertical $K_v$ and phase $\Phi$). Depending on the polarization wanted, these parameters take different values (horizontal linear polarization $K_h=0$, vertical linear polarization $K_v=0$, linear polarizartion at 45\textdegree $K_h=K_v$, $\Phi=0$, circular polarization $K_h=K_v$, $\Phi=90$\textdegree ). In Fig.~\ref{fig:M1powerdensity} the incident power density on the M1 mirror surface is plotted for $K=\sqrt{K_h^2 + K_v^2}=3.07$ in various polarization states.
 
 \begin{figure} 
+\label{fig:M1powerdensity}
 \begin{center}
 \begin{tabular}{l} 
    a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -380,119 +366,168 @@ It is important to note that our water-cooled finite element model does not incl
 \end{tabular}
 \end{center}
 \caption
-{ \label{fig:M1powerdensity} Power density on mirror M1.
-a) $K_h=3.07, K_v=0$,
-b) $K_h=0,K_v=3.07$,
-c) $K_h=2.171,K_v=2.171, \Phi=0$ \textdegree,
-d) $K_h=2.171,K_v=2.171, \Phi=90$ \textdegree.
+{  Power density (in W/mm$^2$) on mirror M1.
+a) $K_h=3.07, K_v=0$ (integrated power 3523 W),
+b) $K_h=0,K_v=3.07$ (integrated power 3776 W),
+c) $K_h=2.171,K_v=2.171, \Phi=0$ \textdegree (integrated power 3978 W),
+d) $K_h=2.171,K_v=2.171, \Phi=90$ \textdegree (integrated power 1353 W).
 %e) $K_h=2.171,K_v=2.171, \Phi=45$ \textdegree,
 %f) $K_h=2.171,K_v=2.171, \Phi=35$ \textdegree,
 }
 \end{figure} 
 
 
+
+In order to calculate the absorbed power density at the mirror, it is necesary to apply the energy-dependent mirror reflectance on the power density for different energies. There are several codes that  can be computed this, like SPECTRA \cite{codeSPECTRA}, SRCALC-IDPOWER \cite{SRCALC} and XOPPY. The last two codes are available in the OASYS environment. Table~\ref{tab:powerValues} shows the results in terms of power absorbed and peak power density as calculated by these three codes. 
+
+
+
+\begin{table}\label{tab:powerValues}
+    \caption{Absorbed power by the mirror M1 in different apertures as calculated by different codes. \todo{remove incomplete tables V and Circ}}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{lccc}
+H polarization & SPECTRA & SRCALC & XOPPY \\
+Power (W) in 500$\times$10 mm$^2$ & 2070 & 2489 & 2347     \\
+Power (W) in 100$\times$2.4 mm$^2$ & 239 & 306 & 245     \\
+Peak power density (W/mm$^2$) & 1.01 & 1.26 & 1.18     \\
+\hline\hline
+V polarization & SPECTRA & SRCALC & XOPPY \\
+Power (W) in 500$\times$10 mm$^2$ & \inred{Grant?} & 2319 & -     \\
+Power (W) in 100$\times$2.4 mm$^2$ & \inred{Grant?} & 292 & -     \\
+Peak power density (W/mm$^2$) & \inred{Grant?} & 1.24 & -     \\
+\hline\hline
+Circ polarization & SPECTRA & SRCALC & XOPPY \\
+Power (W) in 500$\times$10 mm$^2$ & - & 535 & -     \\
+Power (W) in 100$\times$2.4 mm$^2$ & - & 3.14 & -     \\
+Peak power density (W/mm$^2$) & - & 0.42 & -     \\
+    \end{tabular}
+    }
+\end{table}
+
+
+
+
+%code with the absorption curve calculated for the mirror's grazing angle and coating .  The peak absorbed power density on the mirror is 1.01 W/mm$^2$. The total absorbed power in a $\pm 3 \sigma$ aperture is approximately 239 W, where $\sigma$ is the width of the spatial distribution of the first harmonic at $K=3.07$, corresponding to an energy of 231 eV.
+
+The distortion of the mirror was calculated using the finite element method, as implemented in the ANSYS software. The result of the finite element calculation is a map of the surface deformation for a given heat load and mirror design. Fig.~\ref{fig:M1deformation} shows the deformation maps (column 1) and the extracted profile (column 2). The maps were loaded in OASYS using a dedicated widget that also extracts the 1D profile and send it to the reflector.
+
+We calculated distortions for two different cooling schemes: a water-side-cooled mirror and a liquid-nitrogen-cooled mirror \todo{ref paper on this, Cutler et. al.}. Both mirrors are made from single-crystal-silicon substrates. In the case of the water-side-cooled mirror, we controlled distortion by a combination of mirror design parameters, specifically beam overfilling, a notched or smart-cut substrate, and tuned cooling length \cite{Zhang} \todo{Grant: do you agree with this ref?}.  Note that we did not optimize these parameters for to minimize height or slope error, but instead chose parameters for a range of heat loads, and to facilitate adaptive correction.
+
+It is important to note that our water-cooled finite element model does not include a mounting or cooling system, and therefore the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
+
+
+
+
   \begin{figure}
+  \label{fig:M1deformation} 
   \begin{center}
    \begin{tabular}{l} 
    a$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    a$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~a$_3$)\\
    \includegraphics[width=0.32\textwidth]{figures/cryogenic2d.png} 
-   \includegraphics[width=0.32\textwidth]{figures/deformationcryogenic1d.png}
-   \includegraphics[width=0.32\textwidth]{figures/intensitycryogenic.png} \\
+   \includegraphics[width=0.32\textwidth]{figures/deformation1.png}
+   \includegraphics[width=0.32\textwidth]{figures/intensity1.png} \\
 
   b$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   b$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b$_3$)\\
   \includegraphics[width=0.32\textwidth]{figures/cryogenic2dKh.png}
-  \includegraphics[width=0.32\textwidth]{figures/deformationcryogenic1dKh.png}
-  \includegraphics[width=0.32\textwidth]{figures/intensitycryogenicKh.png} \\
+  \includegraphics[width=0.32\textwidth]{figures/deformation2.png}
+  \includegraphics[width=0.32\textwidth]{figures/intensity2.png} \\
    
    c$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    c$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c$_3$)\\ 
    \includegraphics[width=0.32\textwidth]{figures/water1_2d.png}
-   \includegraphics[width=0.32\textwidth]{figures/deformationwater1_1d.png}   
-   \includegraphics[width=0.32\textwidth]{figures/intensitywater1.png} \\
+   \includegraphics[width=0.32\textwidth]{figures/deformation3.png}   
+   \includegraphics[width=0.32\textwidth]{figures/intensity3.png} \\
 
    
    d$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    d$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~d$_3$)\\
    \includegraphics[width=0.32\textwidth]{figures/water2_2d.png} 
-   \includegraphics[width=0.32\textwidth]{figures/deformationwater2_1d.png} 
-   \includegraphics[width=0.32\textwidth]{figures/intensitywater2.png}\\
+   \includegraphics[width=0.32\textwidth]{figures/deformation4.png} 
+   \includegraphics[width=0.32\textwidth]{figures/intensity4.png}\\
    
    \end{tabular}
   \end{center}
    \caption
-   { \label{fig:M1deformation} 
+   { 
    Left column: 2D map of the surface deformation: a$_1$) cryogenic mirror for $K_h=3.07$, $K_v=0$; b$_1$) cryogenic mirror for $K_h=0$, $K_v=3.07$; c$_1$) water-cooled mirror $K_h=3.07$, $K_v=0$; d$_1$) water-cooled mirror $K_h=0$, $K_v=3.07$. Central column: the extracted 1D profiles a$_2$,b$_2$,c$_2$, and d$_2$ respectively. Right column: The focused image with these profiles are in Figs.~a$_3$, b$_3$, c$_3$ and d$_3$, respectively. 
-   The FWHM values are: 3.72, 3.74, 8.31 and 35.08$\mu$m, respectively (3.68 $\mu$m for the undeformed one) and the Strehl ratios: 0.99, 0.98, 0.42 and 0.11, respectively (one for the undeformed mirror).
-   \todo{calculate one case for circular/elliptical polarization}
+   The FWHM values are: 3.85, 3.91, 8.53 and 36.34$\mu$m, respectively (3.68 $\mu$m for the undeformed one) and the Strehl ratios: 0.99, 0.98, 0.43 and 0.11, respectively (one for the undeformed mirror).
    }
    \end{figure} 
 
 
 \subsection{Beamline simulation and effect of M1 deformation}
 
-\todo{Wavefront calculations are done at E=250 eV (K=2.924). FEA is for E=230.888 (K=3.07). Redo the plots for E=230.888. Calculate also the FIFTH harmonic.} 
+\todo{Check E=230.888 everywhere} 
 
-The beamline simulation has been performed using WOFRY. The undulator field is calculated at a position just before M1 ($y$=13.73 m) using the model described in Section~\ref{sec:undulator}. M1 is a plane reflector that accepts a deformation profile. We first studied the case of no deformation. The wavefront is propagated from M1 to a distance 13.599 m in free space until M3 position using the zoom propagator (Section~\ref{sec:zoomPropagator}). Then M3 implements a reflector with a radius obtained from the lens equation $1/p + 1/q=1/f=2/R$ where $p=13.73+13.599$, $q=2.64$. With no deformation in M1 the image has a full-width at half maximum of 3.74 $\mu$m (Fig.~\ref{fig:nodeformation} and an intensity of 210 in arbitrary units, which will be then used to normalize intensities with the non-deformed case and calculate the Strehl ratio
+The beamline simulation has been performed using WOFRY. The undulator field is calculated at a position just before M1 ($y$=13.73 m) using the model described in Section~\ref{sec:undulator}. M1 is a plane reflector that accepts a deformation profile. We first studied the case of no deformation. The wavefront is propagated from M1 to a distance 13.599 m in free space until M3 position using the zoom propagator (Section~\ref{sec:zoomPropagator}). Then M3 implements a reflector with a radius $R=220.72$~m obtained from the lens equation $1/p + 1/q=1/f=2/(R \sin(\theta)$ with $p=13.73+13.599$, $q=2.64$, $\theta=1.25$\textdegree. With no deformation in M1 the image has a full-width at half maximum of 3.84 $\mu$m (Fig.~\ref{fig:nodeformation} and an intensity of 213 in arbitrary units, which will be then used to normalize intensities with the non-deformed case and calculate the Strehl ratio
 
 \begin{figure} 
+\label{fig:nodeformation} 
 \begin{center}
 \begin{tabular}{c} 
-\includegraphics[trim=0 0 5 200,clip,width=0.95\textwidth]{figures/wofrynodeformation.png}
+%\includegraphics[trim=0 0 5 200,clip,width=0.95\textwidth]{figures/wofrynodeformation.png}
+\includegraphics[width=0.95\textwidth]{figures/wofrynodeformation.png}
 
 \end{tabular}
 \end{center}
 \caption
-{ \label{fig:nodeformation} 
-OASYS workspace showing the simulation for the beamline with no deformation in M1. The intensity profile of the beam are superposed at different positions, with FWHM of 787$\mu$m at M1, 1566$\mu$m at M3 and 3.74$\mu$m at the focal position.  }
+{ 
+OASYS workspace showing the simulation for the beamline with no deformation in M1. The intensity profile of the beam are superposed at different positions, with FWHM of 819$\mu$m at M1, 1631$\mu$m at M3 and 3.82$\mu$m at the focal position.  }
 \end{figure} 
 
-Then we add the different mirror deformations with the following results: for the cryogenically cooled mirror there is no significant degradation of intensity distribution of the image, increasing slightly the width (3.72$\mu$m and 3.74$\mu$m for the beam horizontally and vertically polarized, respectively) when compared with the undeformed calculation (3.68$\mu$m). There is a small degradation in the Strehl ratio (0.99 and 0.98 for H and V polarization) (column 3 in Fig.~\ref{fig:M1deformation}). For the case of water cooled mirror the situation changes: The focal spot degraded to a FWHM=8.31~$\mu$m for H polarization and 35.08$\mu$m for V polarization, with a consequent Strehl ratio of 0.42 (H) and 0.11 (V), values that are unacceptable for most applications. 
+The different mirror deformations in M1 with the following results: for the cryogenically cooled mirror there is no significant degradation of intensity distribution of the image, increasing slightly the width (3.85$\mu$m and 3.91$\mu$m for the beam horizontally (H) and vertically (V) polarized, respectively) when compared with the undeformed calculation (3.82$\mu$m). There is a small degradation in the Strehl ratio (0.99 for H polarization and 0.98 for V) (column 3 in Fig.~\ref{fig:M1deformation}). For the case of water cooled mirror the situation changes: The focal spot degraded to a FWHM=8.52~$\mu$m for H polarization and 36.34$\mu$m for V polarization, with a consequent Strehl ratio of 0.43 (H) and 0.11 (V), values that are unacceptable for most applications. 
 
-We can conclude that the cryogenic cooling is almost perfect from the point of view that it does not alter the intensity distribution with optimum Strehl ratios. The deformation of the water cooled mirrors produces a large deterioration of the intensity profile for both cases of polarization. The associated Strehl ratio are far away from what is usually accepted (larger than 0.8). There is a larger deterioration for the case of $K_v\ne 0$ corresponding to light polarized in the plane perpendicular to the electron orbit. The next section discusses whether the AXO can improve the situation for water-cooled mirrors.    
+We can conclude that the cryogenic cooling is almost perfect in the sense that it does not alter the intensity distribution with optimum Strehl ratios. The deformation in the water cooled mirrors produces a large deterioration of the intensity profile for both cases of polarization. The associated Strehl ratio are far away from what is usually accepted (larger than 0.8). There is a larger deterioration for the case of $K_v\ne 0$ corresponding to light polarized in the plane perpendicular to the electron orbit. The next section discusses whether the AXO can improve the situation for water-cooled mirrors.    
 
 \subsection{Adaptive X-ray Optics M3}
 
-The M3 mirror is an adaptive shaped mirror presenting a predefined elliptical shape with a bimorph mechanism that is able to modify the ellipse in the tangential direction (horizontal) to correct for possible deformations. It will work in close association with a wavefront sensor placed just upstream it. The diagnostic system will analyze the wave phase received from the wavefront sensor, calculate the distortion as a difference from the measured phase map and the ideal one, compute the mirror profile, calculate the inputs for the adaptive optics actuators that will shape the mirror to the calculated profile also accounting for additional effects (backend, dynamic effects).
+The M3 mirror is an adaptive mirror presenting a predefined elliptical shape. It incorporated a bimorph mechanism able to modify the ellipse in the tangential direction (horizontal) to correct for possible deformations. It will work in close association with a wavefront sensor placed just upstream from it. The diagnostic system will analyze the wave phase received from the wavefront sensor, calculate the distortion as a difference from the measured phase map and the ideal one, compute the correcting mirror profile, calculate the inputs for the adaptive optics actuators that will shape the mirror to the calculated profile, also accounting for additional effects (backend, dynamic effects).
 
-The simulations use a widget application {\it WOFRY corrector (reflector)} that computes and applies the correction in the following way: i) it extracts the phase from the incident wave $\phi_{inc}(x)$, ii)  it calculates the phase spherical wave collapsing to this focal position $\phi_{sph}(x)$, given a distance to the waist (position where we want to focus), iii) calculate the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc}$, and iv) compute the profile height $h(w) = -\Delta \phi(w) / (2 k \sin \theta)$. Fig.\ref{fig:intensitycorrected}a shows the result using the corrected profiles added to the elliptical shape of the mirror. It is noticeable that the correction works perfectly, arriving to results in intensity distribution and Strehl ratio that are almost identical to case using the undeformed M1. The Strehl ratio has been calculated as the ratio of the peak intensity for the deformed M1 and corrected M3 mirrors over the peak intensity of the undeformed M1 and uncorrected M3. It may look paradoxal that the Strehl ratio is slightly bigger than one for the cases of water-cooled M1. The reason of this apparent contradiction is that M1 becomes convex due to the thermal load (See Figs.~\ref{fig:M1deformation}c$_2$ and d$_2$), therefore M3 sees the source farther away and refocuses it by increasing its curvature thus producing a new optical system with higher demagnification and consequently higher Strehl ratio.   
+To simulate the AXO an OASYS widget "WOFRY corrector (reflector)" computes and applies the correction to the wavefront in the following way: i) it extracts the phase from the incident wave $\phi_{inc}(x)$, ii)  it calculates the phase spherical wave collapsing to this focal position $\phi_{sph}(x)$, given a distance to the waist (position where we want to focus), iii) calculate the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc}$, and iv) compute the profile height $h(w) = -\Delta \phi(w) / (2 k \sin \theta)$.
 
 
    \begin{figure}
+   \label{fig:intensitycorrected} 
    \begin{center}
    \begin{tabular}{l} 
   a$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   a$_2$)\\
 
-    \includegraphics[width=0.5\textwidth]{figures/correctedprofiles.png}
+    \includegraphics[width=0.5\textwidth]{figures/correctionprofiles.png}
     \includegraphics[width=0.5\textwidth]{figures/intensitycorrected.png} \\ 
   b$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   b$_2$)\\
-   \includegraphics[width=0.5\textwidth]{figures/correctedprofilesfitextrapolated.png}
-   \includegraphics[width=0.5\textwidth]{figures/intensitycorrectedfit.png} \\   
+   \includegraphics[width=0.5\textwidth]{figures/correctionprofilesextrapolated.png}
+   \includegraphics[width=0.5\textwidth]{figures/intensitycorrectedextrapolated.png} \\   
   c$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   c$_2$)\\
-   \includegraphics[width=0.5\textwidth]{figures/correctedprofilesfit.png}
-   \includegraphics[width=0.5\textwidth]{figures/intensitycorrectedfitcrop.png}\\
+   \includegraphics[width=0.5\textwidth]{figures/correctionprofilescropped.png}
+   \includegraphics[width=0.5\textwidth]{figures/intensitycorrectedcropped.png}\\
 
    \end{tabular}
    \end{center}
    \caption
-   { \label{fig:intensitycorrected} 
+   { 
 Correction profile on M2 (left) and intensity distribution (right) at the focal position when the different deformations of M1 are corrected by the AXO in M3 using  a) ideal correction profile, b)  expansion of the ideal profiles as a function of the AXO orthonormal basis and extrapolating the edges to the needed mirror length, and c)  expansion of the ideal profiles as a function of the AXO orthonormal basis which defines a shorter the mirror dimension. Note that the intensity profiles have been shifted vertically for clarity. }
    \end{figure} 
 
 
+
+Fig.\ref{fig:intensitycorrected}a shows the result using the corrected profiles added to the elliptical shape of the mirror. It is noticeable that the correction works perfectly, arriving to results in intensity distribution and Strehl ratio that are almost identical to case using the undeformed M1. The Strehl ratio has been calculated as the ratio of the peak intensity for the deformed M1 and corrected M3 mirrors over the peak intensity of the undeformed M1 and uncorrected M3. It may look paradoxal that the Strehl ratio is slightly bigger than one for the cases of water-cooled M1. The reason of this apparent contradiction is that M1 becomes convex due to the thermal load (See Figs.~\ref{fig:M1deformation}c$_2$ and d$_2$), therefore M3 sees the source farther away and refocuses it by increasing its curvature thus producing a new optical system with higher demagnification and consequently higher Strehl ratio.   
+
+
+
 The next question is whether the correcting profiles can be obtained from the real AXO. For that we need a realistic model of the adaptive mirror.
-We used experimental data from the study of a AXO mirror prototype manufactured by JTEC and tested at APS \todo{reference, experiment number?}. The mirror length is \inred{140 mm} and includes 18 actuators. The mirror profiles obtained by activating a single actuator were measured. The 18 profiles obtained are called influence functions. If we want to set a given arbitrary  profile in the mirror, we decompose this profile as a linear combination of the influence functions. The 18 coefficients constitute the input to the actuators.  
+We used experimental data from the study of a AXO mirror prototype manufactured by JTEC and tested at APS \todo{reference, experiment number?}. The mirror length is \inred{140 mm} and the AXO mirror has 18 actuators. The mirror profiles obtained by activating a single actuator were measured. The 18 profiles obtained are called influence functions. If we want to set a given arbitrary  profile in the mirror, we decompose this profile as a linear combination of the influence functions. The 18 coefficients constitute the input to the actuators.  
 We perform a Gram-Schmidt fitting of the correction profile on an orthonormal basis of AXO influence functions. The basis is computed from the 18 measured influence functions plus a constant term to account for path length changes, and a linear term to provide tilt capabilities. The correction profile is easily expressed as a linear combination of the orthonormal bases. The reconstructed profile built in this way constitutes the "realistic" profile that could be obtained by the AXO. Obviously not every profile could be obtained from the AXO system. For instance, our mirror of length $L$ with 18 actuators could not produce a sinusoidal profile with period smaller than $L/18$. 
 
 To accept the full beam the M3 mirror length should be 270 mm which is practically the double of the AXO mirror prototype used. There are three possible scenarios for implementing AXO in M3. The first is get from the manufactures a single mirror which is practically a double replica of the studied prototype, i.e., a length of 2$\times$140 mm with 2$\times$18 actuators. This is the most expensive solution but we expect it would give the best results. We do not study this possibility as we do not have the necessary data. A second possibility is to manufacture a mirror of 270 mm length with the same number of actuators placed in the same geometry. This mirror will be "non-adaptive" at the edges, but we may expect quite good results as usually the central ("adaptive") part receives a large amount of the intensity. A third situation would be to use the existing AXO prototype as M3 mirror.  
 
 In Fig.~\ref{fig:intensitycorrected} \inred{(left column)} one can see the different corrective profiles used for M3. 
 Fig.~\ref{fig:intensitycorrected}a$_1$ presents the ideal corrective profiles as needed for correcting perfectly the wavefront. Fig.~\ref{fig:intensitycorrected}b$_1$ shows the mirror profiles built from the AXO orthonormal bases and extended to the needed dimension by extrapolating the edges. Fig.~\ref{fig:intensitycorrected}c$_1$ shows the mirror profiles also decomposed in orthonormal bases but limited to the mirror length of the JTEC prototype measerued. In this case the mirror length is 140~mm and slightly crops the beam.
-The right column of the Figure shows the intensity distributions obtained with these profiles.
+The right column of Fig.\ref{fig:intensitycorrected} shows the intensity distributions obtained with these profiles.
 The correction obtained using extrapolated profiles (Fig.~\ref{fig:intensitycorrected}b$_2$) is almost identical to the one obtained using the ideal correcting profiles (Fig.~\ref{fig:intensitycorrected}a$_2$). It is due to the fact that the edges of the mirror, that are obtained by extrapolation of the profile resulting from the expansion on the orthonormal basis, influence very little the intensity distribution. This results evidence the ability of the AXO to compensate for the surface errors induced by heat load in M1. The case of using directly the existing AXO prototype for this beamline (Fig.~\ref{fig:intensitycorrected}c$_2$) shows two effects: a reduction of the total intensity as the beam overfills the mirror losing part of its intensity; and also the creation of low intensity diffraction fringes around X=$\pm6.5\mu$m. These effects contribute to reduce the Strehl ratio to 0.8 independently of the selected cooling conditions.
 
 
@@ -504,38 +539,38 @@ We created profiles with a "bump" (convex) or anti-bump (concave) (Fig.~\ref{fig
 For small errors (large curvature radii, above 50 Km), the changes in the intensity distribution are small and the Strehl Ratio is approximately one. For smaller radii, there are cases where the bump spreads the light at M3, allowing the adaptive correction to achieve an effectively higher numerical aperture (NA). When that happens, the beam is focused to a smaller point in the exit slit plane and the intensity increases, leading to an apparent Strehl Ratio above one. However, integrated power is conserved. For concave bumps (Fig.~\ref{fig:strehlRatioVersusR}a) the correction fails around a radius of about 600 m when the deformation in M1 focuses the beam into M3. As discussed before, there are situations in particular for radius of curvature less that 1 Km that the Strehl ration increses to levels much higher than one, due to the increase of NA. Figs.~\ref{fig:strehlRatioVersusR}c and d show the same calculations with the profiles expanded as a function of the AXO orthonormal bases and extrapolated to the needed mirror length. It shows a similar trend for high radii (small deformations) but contrary to what has been obtained for the ideal correcotors, the Strehl ratio now decreases for high curvatures. \todo{discuss why}. In particular the correction at E=250 eV demonstrated lack of efficiency for curvature radii less than 1 Km. 
 
   \begin{figure}
+  \label{fig:strehlRatioVersusR} 
   \begin{center}
   \begin{tabular}{l} 
   a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b) \\
-  \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor1.png}
-    \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor-1.png} 
-    \\
-      c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~d) \\
-  \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor1_fit.png}
-  \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor-1_fit.png} 
+  \includegraphics[width=0.5\textwidth]{figures/scan_peak_vs_negative_radius.png}
+    \includegraphics[width=0.5\textwidth]{figures/scan_peak_vs_positive_radius.png} 
+%     \\
+%       c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~d) \\
+%   \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor1_fit.png}
+%   \includegraphics[height=0.3\textwidth]{figures/flexon_ken_memo2_factor-1_fit.png} 
   
   \end{tabular}
   \end{center}
-  \caption
-  { \label{fig:strehlRatioVersusR} 
-Variation of the Strehl ratio as a function of the deformation radius of curvature in M1 for concave curvature (left) and convex curvature (right): a) concave deformation with ideal corrective profile, b) convex deformation with ideal corrective profile, c) concave deformation with corrective profile expressed as a function of AXO basis, and d) convex deformation with corrective profile expressed as a function of AXO basis.
-\todo{add grid in figure to make more visible the limit SR=1}}
+  \caption{
+Variation of the Strehl ratio at $E$=230.88 eV as a function of the deformation radius of curvature in M1 for a) convex curvature (bump) and b) concave curvature (anti-bump). Deformation is compensated with the corrective profiles in M3 expressed as a function of AXO basis for two cases: crop the profile to the AXO dimension and extrapolate the profile outside the AXO mirror (see text).}
   \end{figure} 
 
 
 Next, we studied a periodic deformation in M1 with a form of cosine. The cosine is selected for having a flat top at the mirror center (a sine would give an inflexion). It has been set an amplitude of the deformation of 20 nm independently of the period. We present in Fig.~\ref{fig:strehlRatioCosine} the results as a function of the number of ripples found in the mirror length. This means that the period of the cosinusoid is the mirror length over the number of ripples, and setting zero ripples for the undeformed profile (defining the normalizetion of Strehl ratio to one). Fig.~\ref{fig:strehlRatioCosine}a shows the Strehl ratio as a function of the number of ripples for the ideal correction. For the uncorrected profiles, the intensity distribution at the focal plane will feature satellite peaks as the deformation acts as a grating. These peaks are intense for only the first order at low energy (250 eV) but many orders are revealed at high energy (1250 eV). That makes that the curve (blue) for E=250 eV saturates above a Strehl ratio of 0.8 but goes doen to zero for E=1250 eV. When the correction is active, it manages to cancel the deformation with resulting Strehl ratio close to one (again, it could be higher than one when the intensity sreads over M3 incrementing the NA). When looking at the corrections produced by the profiles expressed as a function of the AXO ortonormal bases (Fig.~\ref{fig:strehlRatioCosine}b) we can appreciate that the correction is good for E=250 eV with a tendency to decrease for high number of ripples (inability of the limited number of actuators to follow the high frequency distortion) and also satisfactory for the case of E=1250 eV, but with oscillatory behaviour, showing that the AXO mirror can or not follow the oscillations produced by the different diffraction orders created. Again, it drops to lower values for high number of ripples, arriving to Strehl ration smaller than 0.8. 
 
   \begin{figure}
+  \label{fig:strehlRatioCosine} 
   \begin{flushleft}
   a)\\
-  \includegraphics[width=0.95\textwidth]{figures/flexon_ken_memo2_cosine.png} \\
+  \includegraphics[width=0.95\textwidth]{figures/scan_peak_vs_cos50.png} \\
   b)\\
-  \includegraphics[width=0.95\textwidth]{figures/flexon_ken_memo2_cosine_fit.png} \\
+  \includegraphics[width=0.95\textwidth]{figures/scan_peak_vs_cos30.png} \\
   \end{flushleft}
 
   \caption
-  { \label{fig:strehlRatioCosine} 
-Variation of the Strehl ratio for a deformation in form of cosine a) deformation compensated by the ideal corrective profile, b) deformation compensated by the corrective profile expressed as a function of AXO basis.
+  {
+Variation of the Strehl ratio for a deformation in form of cosine and corrections a) deformation amplitude 50 nm, and b) 30 nm.
 }
   \end{figure} 
   
@@ -549,6 +584,7 @@ For completeness, we simulate the beamline in the vertical plane, featuring a gr
 
 
   \begin{figure}
+  \label{fig:grating} 
   \begin{center}
 
   a)\\
@@ -559,7 +595,7 @@ For completeness, we simulate the beamline in the vertical plane, featuring a gr
 
   \end{center}
   \caption
-  { \label{fig:grating} 
+  { 
 a) VLS profile used for the simulations (fragment). The total VLS grating length is 150 mm and contains 5 10$^5$ points. b) Intensity profile at the image position (exit slit) produced by the VLS grating.   
 }
   \end{figure}
@@ -568,6 +604,7 @@ a) VLS profile used for the simulations (fragment). The total VLS grating length
 The simulations for the vertical plane are combined with the results for the horizontal plane (Fig.~\ref{fig:nodeformation} or \ref{fig:intensitycorrected}) for making a 2D plot. This is done via the outer product of the horizontal and vertical profiles. Fig.~\ref{fig:intensity2D} shows the results for the worst case of deformation (vertical polarization with water cooling) before and after correction. 
 
   \begin{figure}
+  \label{fig:intensity2D} 
   \begin{center}
   \begin{tabular}{l} 
   a)\\
@@ -578,7 +615,7 @@ The simulations for the vertical plane are combined with the results for the hor
   \end{tabular}
   \end{center}
   \caption
-  { \label{fig:intensity2D} 
+  { 
 2D intensity at the image position (exit slit plane) obtained for the worst deformation case (vertical polarization and water cooled M1) a) uncorrected image. b) corrected image by using M3 AXO. These images have been obtained combining the vertical profile (Fig.~\ref{fig:grating})) with the uncorrected and corrected horizontal profiles (Figs.~\ref{fig:nodeformation} and \ref{fig:intensitycorrected}, respectively.)
 }
   \end{figure}
