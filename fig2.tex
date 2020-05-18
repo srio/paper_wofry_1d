@@ -1,0 +1,62 @@
+\NeedsTeXFormat{LaTeX2e}
+%
+\documentclass[aps,pra,showpacs,twocolumn,amsmath,amssymb,superscriptaddress,nofootinbib]{revtex4}
+\usepackage{graphicx}% Include figure files
+\usepackage{bm}% bold math
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage{soul}
+\usepackage{nopageno}
+%%
+
+\newcommand{\ind}[1]{_{#1}}    % generalized index instead of the specific
+\newcommand{\indrm}[1]{_{\mathrm {#1}}}    % generalized index instead of the specific
+\newcommand{\mo}{D}   % letter for a monochromator 
+\newcommand{\vsz}{\Delta \tilde{x}_{\ind{2}}}   %  vertical image size
+\definecolor{lightgray}{gray}{0.75}
+
+\bibliographystyle{apsrev}
+\begin{document}  
+
+\thispagestyle{empty}
+
+ \begin{figure}
+  \label{fig:M1deformation} 
+  \begin{center}
+   \begin{tabular}{l} 
+   a$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   a$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~a$_3$)\\
+   \includegraphics[width=0.32\textwidth]{figures/cryogenic2d.png} 
+   \includegraphics[width=0.32\textwidth]{figures/deformation1.png}
+   \includegraphics[width=0.32\textwidth]{figures/intensity1.png} \\
+
+  b$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  b$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b$_3$)\\
+  \includegraphics[width=0.32\textwidth]{figures/cryogenic2dKh.png}
+  \includegraphics[width=0.32\textwidth]{figures/deformation2.png}
+  \includegraphics[width=0.32\textwidth]{figures/intensity2.png} \\
+   
+   c$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   c$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c$_3$)\\ 
+   \includegraphics[width=0.32\textwidth]{figures/water1_2d.png}
+   \includegraphics[width=0.32\textwidth]{figures/deformation3.png}   
+   \includegraphics[width=0.32\textwidth]{figures/intensity3.png} \\
+
+   
+   d$_1$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   d$_2$)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~d$_3$)\\
+   \includegraphics[width=0.32\textwidth]{figures/water2_2d.png} 
+   \includegraphics[width=0.32\textwidth]{figures/deformation4.png} 
+   \includegraphics[width=0.32\textwidth]{figures/intensity4.png}\\
+   
+   \end{tabular}
+  \end{center}
+  
+   \end{figure} 
+
+
+
+\end{document}
+
