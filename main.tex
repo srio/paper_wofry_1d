@@ -46,6 +46,10 @@
 
 \title{Compensation of heat load deformations using adaptive optics for the ALS upgrade: a wave optics study}
 
+%1) An inclusive (or complete) beamline optimization package to compensate for heat load and other defects with adaptive optics
+
+%2) Adaptive optics to compensate for thermal deformation: theory, simulation and application.
+
 \author[a]{Manuel}{Sanchez del Rio}
 \cauthor[a]{Antoine}{Wojdyla}{awojdyla@lbl.gov}{}
 \author[a]{Kenneth A.}{Goldberg}
@@ -116,7 +120,7 @@ A spherical wave (strictly speaking a circular wave in 1D, but we keep the termi
 % possible figure: 
 % https://slideplayer.com/slide/730247/2/images/10/Spherical+wave+propagation.jpg
 
-A Gaussian beam \inblue{at the source position $y$=0 has constant phase and} intensity following a Gaussian distribution with standard deviation $\sigma_I$, thus the electric disturbance is: 
+A Gaussian beam at the source position $y$=0 has constant phase and intensity following a Gaussian distribution with standard deviation $\sigma_I$, thus the electric disturbance is: 
 \begin{equation}
 \label{eq:gaussianSource}
     E(x;y=0,\omega) = E_0 e^{-x^2 / (4 \sigma_I^2)}
@@ -131,7 +135,7 @@ A single electron (or filament beam) traveling in an undulator with pure sinusoi
 \label{eq:undulatorDivergence}
     \sigma'_u \approx\sqrt{\frac{\lambda}{2 L}},
 \end{equation}
-with wavelength of the photons at the undulator resonance, $\lambda$, and undulator length, $L$. At the source point, the size of the source can also be approximated by a Gaussian of
+with wavelength of the photons at the undulator resonance, $\lambda$, and undulator length, $L$. At the source point, the size of the source can also be approximated by a Gaussian of width
 \begin{equation}
 \label{eq:undulatorSize}
     \sigma_u \approx\sqrt{\frac{\lambda L}{2 \pi^2}} = \frac{\lambda}{2 \pi} \frac{1}{\sigma'}.
@@ -267,7 +271,8 @@ with $\alpha$ the incidence angle (measured with respect to the normal), $\beta$
 %(note than in SHADOW is the contrary, inside orders are negative)
 $\lambda$ is the photon wavelength, and $g$ is the grating groove density, which is a function of $w$ for VLS gratings: $g = g_0 + g_1 w + g_2 w^2 + ...$ with $g_0 = 1/d_0$ the lines per unit of length at the grating center ($d_0$ the distance between two grating lines).
 
-The simulation of a grating using a thin object model (Eq.~\ref{eq:idealReflector}) is difficult because in addition to the geometric optical path it is necessary to account for the wavelength-dependent component. We use here an approach that is exact, except for accounting for the diffraction efficiency, which consisting of sampling the grating as a numeric mesh and apply the ``grazing reflector." It is important not to undersample the grating (e.g., we must include several points per period) and orientate the incident and image wavefronts with the correct angles $\alpha$ and $\beta$.
+The simulation of a grating using a thin object model (Eq.~\ref{eq:idealReflector}) is difficult because in addition to the geometric optical path it is necessary to account for the wavelength-dependent component. We use here an approach that is exact, except for accounting for the diffraction efficiency, which consisting of sampling the grating as a numeric mesh and apply the ``grazing reflector." 
+This model also permits to study line spacing errors together with height errors of the substrate. It is important not to undersample the grating (e.g., we must include several points per period) and orientate the incident and image wavefronts with the correct angles $\alpha$ and $\beta$.
 
 %
 %
@@ -286,7 +291,7 @@ The total power $P$ emitted by an undulator is (e.g., \cite{elleaume})
 \begin{equation}
     P[\textrm{W}] = 72.5688 (E_e [\textrm{GeV}])^2  I[\textrm{A}]  N_u  K^2 / \Lambda[\textrm{mm}],
 \end{equation}
-where $K$ is the undulator deflecting parameter, $N_u$ the number of periods, $\Lambda$ the undulator period, $I$ is the storage ring current, and $E_e$ is the storage ring energy. From this equation we can deduce that the maximum of power is obtained at maximum of $K$ corresponding to the minimum of the energy for a given harmonic.  We have selected the case of the FLEXON beamline because the proposed insertion device will deliver high power and the beamline optical design follows the structure described above. Therefore, it constitutes the worst case that requires the most demanding actions to minimize the deformations (in M1) and correct the distortions (in M3). The FLEXON beamline will incorporate a Delta undulator \cite{deltaundulator} with $\Lambda$=~28.8~mm, $N_u$~=~137 and $K_{max}$~=~3.07, emitting a total power of $P$~=~6507~W in the ALS-U storage ring (2~GeV, 0.5~A).
+where $K$ is the undulator deflection parameter, $N_u$ the number of periods, $\Lambda$ the undulator period, $I$ is the storage ring current, and $E_e$ is the storage ring energy. From this equation we can deduce that the maximum of power is obtained at maximum of $K$ corresponding to the minimum of the energy for a given harmonic.  We have selected the case of the FLEXON beamline because the proposed insertion device will deliver high power and the beamline optical design follows the structure described above. Therefore, it constitutes the worst case that requires the most demanding actions to minimize the deformations (in M1) and correct the distortions (in M3). The FLEXON beamline will incorporate a Delta undulator \cite{deltaundulator} with $\Lambda$=~28.8~mm, $N_u$~=~137 and $K_{max}$~=~3.07, emitting a total power of $P$~=~6507~W in the ALS-U storage ring (2~GeV, 0.5~A).
 
 The white beam mirror M1 is placed at a distance 13.73~m from the source, has a grazing angle of 1.25\textdegree, and is gold coated. The distribution of the heat load on the mirror depends on undulator parameters (deflection parameters, horizontal $K_h$, vertical $K_v$, and phase $\Phi$). Depending on the desired polarization, these parameters take different values. For example, for horizontal linear polarization, $K_h=0$; vertical linear polarization, $K_v=0$; linear polarizartion at 45\textdegree $K_h=K_v$, $\Phi=0$; circular polarization $K_h=K_v$, $\Phi=90$\textdegree. In Fig.~\ref{fig:M1powerdensity}, the incident power density on the M1 mirror surface is plotted for $K=\sqrt{K_h^2 + K_v^2}=3.07$ in various polarization states. The undulator tuned at K=3.07 will have its first harmonic at photon energy 230.888 eV which central cone divergence is 32~$\mu$rad rms.
 
@@ -371,7 +376,8 @@ Peak power density (W/mm$^2$) &
 
 The distortion of the mirror was calculated using the finite-element method (FEM), as implemented in ANSYS software (\url{http://ansys.com}) for the horizontal and vertical polarizations. The case of circular polarizations has not been considered because of the small absorbed power. The FEM calculation generates a map of the surface deformation for a given heat load and mirror design, including cooling. Figure~\ref{fig:M1deformation} shows the deformation maps (column 1) and the tangential profile at the mirror center (column 2). The maps were loaded in OASYS using a dedicated widget that also extracts the 1D profile and for the reflector widget.
 
-We calculated surface deformations for two different cooling schemes: a water-side-cooled mirror and a liquid-nitrogen-cooled mirror \cite{cuttler}. Both mirrors are made from single-crystal silicon substrates. In the case of the water-side-cooled mirror, we controlled distortion by a combination of mirror design parameters, including beam overfilling, a notched or smart-cut substrate, and tuned cooling length \cite{Zhang}.  Note that we did not optimize these parameters to minimize height or slope error, but instead chose parameters for a range of heat loads, and to facilitate adaptive correction.
+We calculated surface deformations for two different cooling schemes: a water-side-cooled mirror and a liquid-nitrogen-cooled mirror \cite{cuttler}. Both mirrors are made from single-crystal silicon substrates. 
+The liquid-nitrogen-cooled mirror substrate has a trapezoidal shape. In the case of the water-side-cooled mirror, we controlled distortion by a combination of mirror design parameters, including beam overfilling, a notched or smart-cut substrate, and tuned cooling length \cite{Zhang}. Note that we did not optimize these parameters to minimize height or slope error, but instead chose parameters for a range of heat loads, and to facilitate adaptive correction.
 
 It is important to note that our water-cooled finite element model does not include a mounting or cooling system, and therefore the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
 
@@ -439,8 +445,7 @@ We can conclude that the cryogenic cooling is almost perfect in the sense that i
 The M3 mirror is adaptive, fabricated with a predefined elliptical shape at rest. It incorporates a bimorph mechanism able to modify the ellipse in the tangential direction (horizontal), as necessary to compensate and correct wavefront errors. It will work with feedback from a wavefront sensor placed just downstream from it. The diagnostic system will analyze the wavefront phase and amplitude, calculate the distortion as a difference from the measured phase map and the ideal one, compute the correcting mirror profile, and calculate the inputs for the adaptive optics actuators required to achieve the desired profile, and also account for additional effects (back-end, dynamic effects).
 
 To simulate the AXO, an OASYS widget ``WOFRY corrector (reflector)'' computes and applies the correction to the wavefront in the following way: i) it extracts the phase from the incident wave $\phi_{inc}(x)$, ii)  it calculates the phase of the spherical wave collapsing to this focal position $\phi_{sph}(x)$, given a distance to focus, %the waist (position where we want to focus), 
-iii) it calculates the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc}$, and iv) it computes the profile height $h(w) = -\Delta \phi(w) / (2 k \sin \theta)$. \inblue{In this model we extract the phase of the wavefront and calculate the corrective profile deterministically, comparing this phase with the spherical collapsing wave without weighting the resulting profile. It should be mention that this method could be improved by doing an optimization of the profile to maximize the Strehl ratio, a process where the weight applied to the profile plays a fundamental role \cite{Goldberg2016}.
-}
+iii) it calculates the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc}$, and iv) it computes the profile height $h(w) = -\Delta \phi(w) / (2 k \sin \theta)$. In this model we extract the phase of the wavefront and calculate the corrective profile deterministically, comparing this phase with the spherical collapsing wave without weighting the resulting profile. It should be mentioned that this method could be improved by doing an optimization of the profile to maximize the Strehl ratio, a process where the weight applied to the profile plays a fundamental role \cite{Goldberg2016}.
 
    \begin{figure}
    \label{fig:intensitycorrected} 
@@ -466,17 +471,13 @@ iii) it calculates the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc
    \end{figure} 
 
 
-Fig.~\ref{fig:intensitycorrected}a shows the result using the corrected profiles added to the elliptical shape of the mirror. We observe that the correction works perfectly, arriving to results in intensity distribution and Strehl ratio that are almost identical to the case using the ideal, undeformed M1. The Strehl ratio has been calculated as the ratio of the peak intensity for the deformed M1 and corrected M3 mirrors over the peak intensity of the undeformed M1 and uncorrected M3. It may look paradoxal that the Strehl ratio exceeds 1.0 for the cases of water-cooled M1 (in Fig.\ref{fig:intensitycorrected}a$_2$). The reason of this apparent contradiction is that M1 becomes convex due to the thermal load (See Figs.~\ref{fig:M1deformation}c$_2$ and \ref{fig:M1deformation}d$_2$), \inblue{
-increasing the divergence and the apparent NA. This results in a new optical system that produces a narrower and taller intensity profile thus a higher Strehl ratio.}
+Fig.~\ref{fig:intensitycorrected}a shows the result using the corrected profiles added to the elliptical shape of the mirror. We observe that the correction results in an intensity distribution and Strehl ratio that are very close to the case using the ideal, undeformed M1. The Strehl ratio has been calculated as the ratio of the peak intensity for the deformed M1 and corrected M3 mirrors over the peak intensity of the undeformed M1 and uncorrected M3. It may look paradoxal that the Strehl ratio exceeds 1.0 for the cases of water-cooled M1 (in Fig.\ref{fig:intensitycorrected}a$_2$). The reason of this apparent contradiction is that M1 becomes convex due to the thermal load (See Figs.~\ref{fig:M1deformation}c$_2$ and \ref{fig:M1deformation}d$_2$), increasing the divergence and the apparent NA at M3. This change produces a narrower and taller intensity profile thus a higher Strehl ratio.
 In such cases, the integrated power is preserved.
 
 \subsection{Adaptive X-ray Optics M3. Realistic case.}
 
-The next question is whether the correcting profiles can be obtained from the real AXO. For that we need a realistic model of the adaptive mirror. We used experimental data from the study of a AXO mirror prototype manufactured by JTEC \inblue{ (\url{http://www.j-tec.co.jp}) and tested at the Advanced Photon Source in a US DOE light sources collaborative effort \cite{ken_spie}.
-The mirror optical length is 140~mm and the AXO mirror has 18  individually addressable piezoelectric actuators, equally spaced over the
-surface, 
-used to correct local imperfections.
-}
+The next question is whether the correcting profiles can be obtained from the real AXO. For that we need a realistic model of the adaptive mirror. We used experimental, x-ray wavefront data from the study of a AXO mirror prototype manufactured by JTEC (\url{http://www.j-tec.co.jp}) and tested at the Advanced Photon Source in collaboration with the authors. The mirror optical length is 140~mm and the AXO mirror has 18  individually addressable piezoelectric actuators, equally spaced over the surface, used to correct local imperfections.
+
 
 Tests were conducted at 14.1 keV photon energy (0.88~\AA). The 18 \emph{influence functions} were obtained by activating each actuator, one at a time, and observing the differential shape changes. To first approximation, each actuator imparts a local curvature at the location of the piezo element, proportional to the voltage applied.
 
@@ -499,7 +500,8 @@ We study here the efficacy of the M3 wavefront correction, to test the limits of
 
 We created M1 shape-error profiles with a convex bump or a concave anti-bump (Fig.~\ref{fig:strehlRatioVersusR}a and \ref{fig:strehlRatioVersusR}b, respectively). For small errors (large curvature radii, above 100 km), the changes in the intensity distribution are negligible and the Strehl ratio is approximately one for all cases, included the uncorrected one. For smaller radii, the Strehl ratio of the uncorrected case drops to zero passing from 100 km down to 100 m, manifesting the need of correction. The adaptive M3 is able to correct the beam and retrieve acceptable values of Strehl ration (close to 0.8 or larger) for radii larger than 1 km. In this zone, both for concave or convex deformations, the case A (extrapolating the active zone of the AXO) perfors better than the case B (cropped profiles), because the latter reduces the NA, increasing the peak width thus decreasing the peak value. 
 
-For concave bumps (Fig.~\ref{fig:strehlRatioVersusR}b) the correction fails near a radius of 600~m when the deformation in M1 focuses the beam onto M3. The M3 mirror fails to compensate M1 radii below 1 km, showing the limit of the AXO optics (the correction using ideal profiles, before expanding in the AXO basis is correcting the beam down to radii of 50--100~m).
+For concave bumps (Fig.~\ref{fig:strehlRatioVersusR}b) the correction fails near a radius of 600~m when the deformation in M1 focuses the beam onto M3. The M3 mirror fails to compensate M1 radii below 5 km, showing the limit of the AXO optics.
+%(the correction using ideal profiles, before expanding in the AXO basis is correcting the beam down to radii of 50--100~m).
 
  %Figs.~\ref{fig:strehlRatioVersusR}c and d show the same calculations with the profiles expanded as a function of the AXO orthonormal bases and extrapolated to the needed mirror length. It shows a similar trend for high radii (small deformations) but contrary to what has been obtained for the ideal correcotors, the Strehl ratio now decreases for high curvatures.
  
