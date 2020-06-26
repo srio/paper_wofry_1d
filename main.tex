@@ -22,7 +22,7 @@
 \newcommand{\inblue}[1]{{\color{blue}#1}}
 \newcommand{\inred}[1]{{\color{red}#1}}
 \newcommand{\ingreen}[1]{{\color{green}#1}}
-\newcommand{\replace}[2]{{\color{red}#1}{\color{red}\sout{#2}}}
+\newcommand{\replace}[2]{{\color{blue}#1}{\color{blue}\sout{#2}}}
 
 
 
@@ -181,11 +181,11 @@ The Fresnel propagator is obtained by making a Taylor expansion of the quadratic
 E(x;y_1) =  \frac{e^{i k (y_1-y_0)}}{\sqrt{i \lambda (y_1-y_0)}} \int E(x';y_0) e^{ \frac{i k}{2 (y_1-y_0)}  (x-x')^2  }  dx'.
 \end{equation}
 
-The Fresnel integral propagator can be seen as convolution of the wavefield with a Gaussian kernel. One can write Eq. \ref{eq:fresnelPropagator} in convolution form, involving \inred{a Fourier transform $\mathcal{F}$ and an inverse Fourier transform $\mathcal{F}^{-1}$}\cite{goodmanfourier}:
+The Fresnel integral propagator can be seen as convolution of the wavefield with a Gaussian kernel. One can write Eq. \ref{eq:fresnelPropagator} in convolution form, involving \inblue{a Fourier transform $\mathcal{F}$ and an inverse Fourier transform $\mathcal{F}^{-1}$}\cite{goodmanfourier}:
 \begin{equation}\label{eq:fft}
-E(x; y_1) = \inred{e^{i k (y_1-y_0)}} \mathcal{F}^{-1}\Big\{ \mathcal{F}\{E\} K \Big\},
+E(x; y_1) = \inblue{P^G} \mathcal{F}^{-1}\Big\{ \mathcal{F}\{E\} K \Big\},
 \end{equation} 
-where \inred{$E$ is the electric perturbance at $y_0$ $E(x;y_0)$, and $K=e^{-i \pi \lambda (y_1-y_0) u^2}$ is the Gaussian Kernel } that comes from the inverse Fourier Transform of the exponential inside the integral in Eq.~\ref{eq:fresnelPropagator}, being $u$, the conjugated variable of $x$.
+where \inblue{$E$ is the electric perturbance at $y_0$ $E(x;y_0)$, $P^G=e^{i k (y_1-y_0)}$ is a global phase and $K=e^{-i \pi \lambda (y_1-y_0) u^2}$ is the Gaussian Kernel } that comes from the inverse Fourier Transform of the exponential inside the integral in Eq.~\ref{eq:fresnelPropagator}, being $u$, the conjugated variable of $x$.
 The real benefit of using this scheme comes from the use of Fast Fourier Transforms, that reduce the number of operations from $N^2$ to $N \log_2 N$. Its use is essential when doing simulations in 2D, because the direct calculation of the integral lead to $N^4$ operations at the limit of calculation power of usual laptop computers. However, the FFT implementation requires that the gridding and spatial domain of the incident and transported wavefronts must be equal. This is a problem when a wavefront is propagated to a focal point: the gridding of the incident wavefront used at the image provides a poor resolution because most of the intensity is concentrated in a very few pixels. A clever solution to this problem is presented by J.D. Schmidt \cite{schmidt} that makes possible to calculate the propagated field in a ``zoomed'' window, thus permitting optimizing the wavefront sampling in cases for propagating highly convergent or divergent wavefronts. The problem reduces to a convolution problem of the unpropagated field field $E(x;y_0)$ affected by a phase $P$ with a kernel $K$, and the result affected by a global phase $P^G$: 
 \begin{equation}
 E(x; y_1) = P^G \mathcal{F}^{-1} \Big\{ \mathcal{F} \big\{ E~~P \big\} K \Big\},
@@ -377,7 +377,7 @@ Peak power density (W/mm$^2$) &
 
 The distortion of the mirror was calculated using the finite-element method (FEM), as implemented in ANSYS software (\url{http://ansys.com}) for the horizontal and vertical polarizations. The case of circular polarizations has not been considered because of the small absorbed power. The FEM calculation generates a map of the surface deformation for a given heat load and mirror design, including cooling. Figure~\ref{fig:M1deformation} shows the deformation maps (column 1) and the tangential profile at the mirror center (column 2). The maps were loaded in OASYS using a dedicated widget that also extracts the 1D profile and for the reflector widget.
 
-We calculated surface deformations for two different cooling schemes: a water-side-cooled mirror and a liquid-nitrogen-cooled mirror \cite{cuttler}. Both mirrors are made from single-crystal silicon substrates. 
+We calculated surface deformations for two different cooling schemes: a water-side-cooled mirror and a liquid-nitrogen-cooled mirror \cite{cutler}. Both mirrors are made from single-crystal silicon substrates.
 The liquid-nitrogen-cooled mirror substrate has a trapezoidal shape. In the case of the water-side-cooled mirror, we controlled distortion by a combination of mirror design parameters, including beam overfilling, a notched or smart-cut substrate, and tuned cooling length \cite{Zhang}. Note that we did not optimize these parameters to minimize height or slope error, but instead chose parameters for a range of heat loads, and to facilitate adaptive correction.
 
 It is important to note that our water-cooled finite element model does not include a mounting or cooling system, and therefore the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
@@ -468,7 +468,7 @@ iii) it calculates the phase difference $\Delta \phi(x) = \phi_{sph} - \phi_{inc
 %   \end{center}
    \includegraphics[width=1.0\textwidth]{figures/fig4.pdf}\\
    \caption
-   { Correction profile on M3 (left) and intensity distribution (right) at the focal position when the different deformations of M1 are corrected by the AXO in M3 using  a) ideal correction profile, b) expansion of the ideal profiles as a function of the AXO orthonormal basis which defines a shorter mirror, and c) \inred{expansion of the ideal profiles as a function of the AXO orthonormal basis and then making a linear extrapolation at the edges to the longer mirror length}. Note that the intensity profiles have been shifted vertically for clarity. }
+   { Correction profile on M3 (left) and intensity distribution (right) at the focal position when the different deformations of M1 are corrected by the AXO in M3 using  a) ideal correction profile, b) expansion of the ideal profiles as a function of the AXO orthonormal basis which defines a shorter mirror, and c) \inblue{expansion of the ideal profiles as a function of the AXO orthonormal basis and then making a linear extrapolation at the edges to the longer mirror length}. Note that the intensity profiles have been shifted vertically for clarity. }
    \end{figure} 
 
 
@@ -506,9 +506,9 @@ We created M1 shape-error profiles with a convex bump or a concave anti-bump (Fi
 
 For concave bumps (Fig.~\ref{fig:strehlRatioVersusR}b) the correction fails near a radius of 600~m when the deformation in M1 focuses the beam onto M3. The M3 mirror fails to compensate M1 radii below 5 km, showing the limit of the AXO optics.
 
-\inblue{REFEREE2 SAYS : the maximum correctable deformations are defined by the AXO maximum voltage without damaging the mirror. I think this should be mentioned. In other words, what is the maximum height change for a single electrode tuning from its minimum voltage to the maximum? Also, it needs to be mentioned that this is the limitation of the existing mirror, not the method itself.}
+%\inblue{REFEREE2 SAYS : the maximum correctable deformations are defined by the AXO maximum voltage without damaging the mirror. I think this should be mentioned. In other words, what is the maximum height change for a single electrode tuning from its minimum voltage to the maximum? Also, it needs to be mentioned that this is the limitation of the existing mirror, not the method itself.}
 
-\inred{I SUGGEST ADDING; The maximum correctable curvature (minimum radius) is defined by the AXO voltage difference between the actuator in the mirror center and those in the mirror edges without damaging the mirror. This defines the curvature sag. This is, however, a limitation of the existing mirror, but not of the method itself.}
+\inred{The maximum correctable curvature (minimum radius) is defined by the AXO voltage difference between the actuator in the mirror center and those in the mirror edges without damaging the mirror. This defines the curvature sag. This is, however, a limitation of the existing mirror, but not of the method itself.}
 
 \ingreen{QUESTIONS: IS THIS LIMITATION CONSIDERED IN THE INFLUENCE FUNCTIONS? HOW ARE THEY MEASURED? USING THE MAX VOLTAGE OR A STEP? IF THE SOLUTION IS REALISTIC (CAN BE PERFORMED BY THE MIRROR) THE COEFFICIENTS OF THE PROFILE EXPANSION VS INFLUENCE FUNCTIONS MUST BE IN A WELL-DEFINED RANGE. BUT HOW THIS IS RELATED TO THE ORTHONORMAL BASIS? WE NEED TO EXPRESS THE CORRECTION AS A FUNCTION OF THE INFLUENCE FUNCTIONS, WHICH WAS DISCUSSED BUT NOT DONE.}
 %(the correction using ideal profiles, before expanding in the AXO basis is correcting the beam down to radii of 50--100~m).
@@ -604,6 +604,7 @@ For this study we developed a simple model to simulate a beamline using 1D wavef
 
 Our analysis, conducted with 230.888 eV photon energy, shows that wavefront disturbances can be corrected using adaptive X-ray optics, as verified by simulating a realistic model of wavefront correction by an adaptive X-ray mirror. Furthermore, we analyzed the M1 deformation range over which the adaptive optics work, by scanning the M1 deformations modelled as curvature (bump or anti-bump) and waviness. We showed that curvatures can be effectively corrected for radii greater than 100~m. The simulations done with wavy profiles show than low spatial frequencies can be corrected, in an optimal mode up to 2--3 ripples per mirror length, and in a satisfactory way (providing Strehl ratio greater than 0.8) up to 5--7 ripples per mirror length. However, the geometry of the adaptive mirror featuring 18 actuators covering a length of 140~mm cannot correct spatial frequencies above 7 ripples across the mirror length. Moreover, correction of the waviness distortions depends on the amplitude; from the two cases analyzed (50 and 30~nm) we found that deformations of 30~nm and below would not produce Strehl ratio below 0.8 thus no correction are needed. The proposed model helped to demonstrate the suitability and limitations of using an adaptive mirror to correct for wavefront deformations originated upstream of it. This approach can be broadly applied to beamlines with adaptive elements. We recommend such studies be conducted to establish the correctable range of errors as a function of photon energy, across a beamline's operating energy range.
 
+OASYS workspaces and scripts used for calculations and graphics in this work are available in the repository {\tt https://github.com/oasys-als-kit/Paper\_JSR\_yi5097}.
 %However, because our water-cooled finite element model does not include a mounting or cooling system, the presented results should be seen as a `best' or idealized case.  In other words, the shape of an actual water-cooled mirror will be more difficult to correct than what the calculations in this model indicate. In contrast, our model of the liquid-nitrogen-cooled mirror does includes mounting and cooling system deformation, and therefore is a more realistic model than what is presented for the water-side-cooled case.
 
 %\acknowledgments % equivalent to
