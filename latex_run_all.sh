@@ -8,7 +8,7 @@ rm figures/fig4.pdf
 ./fig4.sh
 
 pdflatex main.tex
-bintex main
+bibtex main
 sleep 1.0
 pdflatex main.tex
 pdflatex main.tex

@@ -1,0 +1,129 @@
+\begin{thebibliography}{20}
+\baselineskip=9pt\parskip=0pt
+
+\harvarditem[Chubar \emph{et~al.}]{Chubar, Berman, Chu, Fluerasu, Hulbert,
+  Idir, Kaznatcheev, Shapiro, Shen \harvardand\ Baltser}{2011}{Chubar2011b}
+Chubar, O., Berman, L., Chu, Y.~S., Fluerasu, S., Hulbert, S., Idir, M.,
+  Kaznatcheev, K., Shapiro, D., Shen, Q. \harvardand\ Baltser, J.
+  \harvardyearleft 2011\harvardyearright{}.
+\newblock \emph{Proc. SPIE}, \volbf{8141}, 8141 -- 8141 -- 10.
+\newline\harvardurl{http://dx.doi.org/10.1117/12.892812}
+
+\harvarditem[Cutler \emph{et~al.}]{Cutler, Cocco, DiMasi, Morton, Sanchez~del
+  Rio \harvardand\ Padmore}{2020}{cutler}
+Cutler, G., Cocco, D., DiMasi, E., Morton, S., Sanchez~del Rio, M. \harvardand\
+  Padmore, H.~A.  \harvardyearleft 2020\harvardyearright{}.
+\newblock \emph{J. Synchrotron Rad.} Accepted. Manuscript ve5130.
+
+\harvarditem{Glass}{2017}{codeCOMSYL}
+Glass, M.,  \harvardyearleft 2017\harvardyearright{}.
+\newblock {COMSYL, COherent Modes for SYnchrotron Light}.
+\newline\harvardurl{http://github.com/mark-glass/comsyl}
+
+\harvarditem{Goldberg \harvardand\ Yashchuk}{2016}{Goldberg2016}
+Goldberg, K.~A. \harvardand\ Yashchuk, V.~V.  \harvardyearleft
+  2016\harvardyearright{}.
+\newblock \emph{Review of Scientific Instruments}, \volbf{87}(5), 051805.
+\newline\harvardurl{https://doi.org/10.1063/1.4950747}
+
+\harvarditem{Goodman}{2017}{goodmanfourier}
+Goodman, J.~W.  \harvardyearleft 2017\harvardyearright{}.
+\newblock \emph{Introduction to Fourier Optics}.
+\newblock New Yor, USA: w.h.freeman, four ed.
+
+\harvarditem[Ichii \emph{et~al.}]{Ichii, Okada, Nakamori, Ueda, Yamaguchi,
+  Matsuyama \harvardand\ Yamauchi}{2019}{Ichii2019}
+Ichii, Y., Okada, H., Nakamori, H., Ueda, A., Yamaguchi, H., Matsuyama, S.
+  \harvardand\ Yamauchi, K.  \harvardyearleft 2019\harvardyearright{}.
+\newblock \emph{Review of Scientific Instruments}, \volbf{90}(2), 021702.
+\newline\harvardurl{https://doi.org/10.1063/1.5066105}
+
+\harvarditem{Marechal}{1947}{Marechal}
+Marechal, A.  \harvardyearleft 1947\harvardyearright{}.
+\newblock \emph{Rev. Optique}, \volbf{26}, 257--277.
+
+\harvarditem{Onuki \harvardand\ Elleaume}{2003}{elleaume}
+Onuki, H. \harvardand\ Elleaume, P.  \harvardyearleft 2003\harvardyearright{}.
+\newblock \emph{Undulators, Wigglers and Their Applications}.
+\newblock CRC Press.
+
+\harvarditem{Raimondi \harvardand\ Spiga}{2014}{Raimondi2014}
+Raimondi, L. \harvardand\ Spiga, D.  \harvardyearleft 2014\harvardyearright{}.
+\newblock \emph{Astronomy {\&} Astrophysics}, \volbf{573}, A22.
+\newline\harvardurl{https://doi.org/10.1051/0004-6361/201424907}
+
+\harvarditem{Rebuffi \harvardand\ Sanchez~del Rio}{2017\emph{a}}{codeWOFRY}
+Rebuffi, L. \harvardand\ Sanchez~del Rio, M.  \harvardyearleft
+  2017\emph{a}\harvardyearright{}.
+\newblock \emph{Proc. SPIE}, \volbf{10388}.
+\newline\harvardurl{https://doi.org/10.1117/12.2274232}
+
+\harvarditem{Rebuffi \harvardand\ Sanchez~del Rio}{2017\emph{b}}{codeOASYS}
+Rebuffi, L. \harvardand\ Sanchez~del Rio, M.  \harvardyearleft
+  2017\emph{b}\harvardyearright{}.
+\newblock \emph{Proc. SPIE}, \volbf{10388}, 10388 -- 10388 -- 9.
+\newline\harvardurl{http://dx.doi.org/10.1117/12.2274263}
+
+\harvarditem{Reininger}{2001}{SRCALC}
+Reininger, R.,  \harvardyearleft 2001\harvardyearright{}.
+\newblock {SRCALC}.
+\newblock Unpublished.
+
+\harvarditem{Reininger \harvardand\ de~Castro}{2005}{reininger2005}
+Reininger, R. \harvardand\ de~Castro, A.  \harvardyearleft
+  2005\harvardyearright{}.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment},
+  \volbf{538}(1), 760 -- 770.
+\newline\harvardurl{https://doi.org/10.1016/j.nima.2004.09.007}
+
+\harvarditem[Sanchez~del Rio \emph{et~al.}]{Sanchez~del Rio, Celestre, Glass,
+  Pirro, Herrera, Barrett, da~Silva, Cloetens, Shi \harvardand\
+  Rebuffi}{2019}{hyerarchical}
+Sanchez~del Rio, M., Celestre, R., Glass, M., Pirro, G., Herrera, J.~R.,
+  Barrett, R., da~Silva, J.~C., Cloetens, P., Shi, X. \harvardand\ Rebuffi, L.
+  \harvardyearleft 2019\harvardyearright{}.
+\newblock \emph{Journal of Synchrotron Radiation}, \volbf{26}(6), 1887--1901.
+\newline\harvardurl{https://doi.org/10.1107/S160057751901213X}
+
+\harvarditem{Schmidt}{2010}{schmidt}
+Schmidt, J.~D.  \harvardyearleft 2010\harvardyearright{}.
+\newblock \emph{Numerical Simulation of Optical Wave Propagation}.
+\newblock Bellingham, WA, USA: SPIE Press.
+
+\harvarditem[Shi \emph{et~al.}]{Shi, Reininger, Sanchez~del Rio \harvardand\
+  Assoufid}{2014}{hybrid}
+Shi, X., Reininger, R., Sanchez~del Rio, M. \harvardand\ Assoufid, L.
+  \harvardyearleft 2014\harvardyearright{}.
+\newblock \emph{Journal of Synchrotron Radiation}, \volbf{21}(4), 669--678.
+\newline\harvardurl{https://doi.org/10.1107/S160057751400650X}
+
+\harvarditem{Strehl}{1894}{Strehl}
+Strehl, K.  \harvardyearleft 1894\harvardyearright{}.
+\newblock \emph{Theory of the Telescope Due to the Diffraction of Light}.
+\newblock Leipzig.
+
+\harvarditem{Tanaka \harvardand\ Kitamura}{2001}{codeSPECTRA}
+Tanaka, T. \harvardand\ Kitamura, H.  \harvardyearleft 2001\harvardyearright{}.
+\newblock \emph{Journal of Synchrotron Radiation}, \volbf{8}(6), 1221--1228.
+\newline\harvardurl{https://doi.org/10.1107/S090904950101425X}
+
+\harvarditem[Temnykh \emph{et~al.}]{Temnykh, Babzien, Davis, Fedurin, Kusche,
+  Park \harvardand\ Yakimenko}{2011}{deltaundulator}
+Temnykh, A., Babzien, M., Davis, D., Fedurin, M., Kusche, K., Park, J.
+  \harvardand\ Yakimenko, V.  \harvardyearleft 2011\harvardyearright{}.
+\newblock \emph{Nuclear Instruments and Methods in Physics Research Section A:
+  Accelerators, Spectrometers, Detectors and Associated Equipment},
+  \volbf{649}(1), 42 -- 45.
+\newblock National Synchrotron Radiation Instrumentation conference in 2010.
+\newline\harvardurl{https://doi.org/10.1016/j.nima.2010.11.011}
+
+\harvarditem[Zhang \emph{et~al.}]{Zhang, Barrett, Friedrich, Glatzel, Mairs,
+  Marion, Monaco, Morawe \harvardand\ Weng}{2013}{Zhang}
+Zhang, L., Barrett, R., Friedrich, K., Glatzel, P., Mairs, T., Marion, P.,
+  Monaco, G., Morawe, C. \harvardand\ Weng, T.  \harvardyearleft
+  2013\harvardyearright{}.
+\newblock \emph{Journal of Physics: Conference Series}, \volbf{425}(5), 052029.
+\newline\harvardurl{https://doi.org/:10.1088/1742-6596/425/5/052029}
+
+\end{thebibliography}

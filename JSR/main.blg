@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: iucr.bst
+Database file #1: report.bib
+Warning--entry type for "SRCALC" isn't style-file defined
+--line 93 of file report.bib
+You've used 20 entries,
+            2962 wiz_defined-function locations,
+            783 strings with 8931 characters,
+and the built_in function-call counts, 11943 in all, are:
+= -- 1126
+> -- 805
+< -- 28
++ -- 242
+- -- 219
+* -- 1085
+:= -- 1890
+add.period$ -- 60
+call.type$ -- 20
+change.case$ -- 160
+chr.to.int$ -- 25
+cite$ -- 20
+duplicate$ -- 449
+empty$ -- 700
+format.name$ -- 315
+if$ -- 2407
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 22
+newline$ -- 103
+num.names$ -- 100
+pop$ -- 336
+preamble$ -- 1
+purify$ -- 153
+quote$ -- 0
+skip$ -- 472
+stack$ -- 0
+substring$ -- 563
+swap$ -- 89
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 224
+warning$ -- 0
+while$ -- 76
+width$ -- 0
+write$ -- 250
+(There was 1 warning)
