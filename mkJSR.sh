@@ -72,9 +72,9 @@ sed "s/figures\/intensitygrating.pdf/figure7b.pdf/" tmp7b.tex > main.tex
 cp figures/intensity2Duncorrected.pdf ./figure8a.pdf
 cp figures/intensity2Dcorrected.pdf ./figure8b.pdf
 mv main.tex tmp8a.tex
-sed "s/figures\/intensity2Duncorrected.pdf/figure7a.pdf/" tmp8a.tex > main.tex
+sed "s/figures\/intensity2Duncorrected.pdf/figure8a.pdf/" tmp8a.tex > main.tex
 mv main.tex tmp8b.tex
-sed "s/figures\/intensity2Dcorrected.pdf/figure7b.pdf/" tmp8b.tex > main.tex
+sed "s/figures\/intensity2Dcorrected.pdf/figure8b.pdf/" tmp8b.tex > main.tex
 
 
 
