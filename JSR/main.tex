@@ -321,38 +321,38 @@ d) $K_h=2.171,K_v=2.171, \Phi=90$ \textdegree (integrated power 1,353 W).
 \end{figure} 
 
 In order to calculate the absorbed power density at the mirror, it is necessary to apply the energy-dependent mirror reflectance on the power density for different energies. There are several codes that can be used to compute this, e.g. SPECTRA \cite{codeSPECTRA}, SRCALC-IDPOWER \cite{SRCALC} and XOPPY. The last two are available in the OASYS environment. Table~\ref{tab:powerValues} shows the results in terms of power absorbed and peak power density as calculated by these three codes. 
-
 \begin{table}\label{tab:powerValues}
-    \caption{Absorbed power by the mirror M1 for two apertures with mirror illuminated areas of 460 $\times$ 10 mm$^2$ and 100 $\times$ 24 mm$&^2$  (6$\sigma$) as calculated by different codes.
+    \caption{Absorbed power by the mirror M1 for two apertures with mirror illuminated areas of 460 $\times$ 10 mm$^2$ and 100 $\times$ 24 mm$&^2$  (6$\sigma$) as calculated by different codes. \inblue{The maximum photon energy considered for SRCALC and XOPPY calculations is 12 keV  .}
+
     }
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lccc}
 H polarization & SPECTRA & SRCALC & XOPPY \\
 Power (W) in 460$\times$10 mm$^2$ & 
 2070 & 
-2312 & 
+\inblue{2128} & 
 2101 \\
 Power (W) in 100$\times$2.4 mm$^2$ & 
 239 & 
-272 & 
+\inblue{247} & 
 225 \\
 Peak power density (W/mm$^2$) & 
 1.01 & 
-1.26 & 
+\inblue{1.13} & 
 1.04  \\
 \hline\hline
 V polarization & SPECTRA & SRCALC & XOPPY \\
 Power (W) in 460$\times$10 mm$^2$ &
 2070 & 
-2306 & 
+\inblue{2122} & 
 2126   \\
 Power (W) in 100$\times$2.4 mm$^2$ & 
 216 & 
-275 & 
+\inblue{249} & 
 227 \\
 Peak power density (W/mm$^2$) & 
 1.01 & 
-1.24 & 
+\inblue{1.12} & 
 1.05  \\
 % \hline\hline
 % Circ polarization & SPECTRA & SRCALC & XOPPY \\
